@@ -13,7 +13,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		6118A376586EE3F169504117 /* libPods-uniontours-uniontoursTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34B2FB13F92C98631A89B5F7 /* libPods-uniontours-uniontoursTests.a */; };
 		6627CD8031EDAD4C7F494625 /* libPods-uniontours.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2124F3DD156EEE587080DC /* libPods-uniontours.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		782C929627FB85DF00177423 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 782C929527FB85DE00177423 /* BootSplash.storyboard */; };
+		787C1D0927FB790600533ECF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 787C1D0827FB790600533ECF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,8 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = uniontours/main.m; sourceTree = "<group>"; };
 		34B2FB13F92C98631A89B5F7 /* libPods-uniontours-uniontoursTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-uniontours-uniontoursTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		744DF7F931655FD62CC1D084 /* Pods-uniontours-uniontoursTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uniontours-uniontoursTests.release.xcconfig"; path = "Target Support Files/Pods-uniontours-uniontoursTests/Pods-uniontours-uniontoursTests.release.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = uniontours/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		782C929527FB85DE00177423 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = uniontours/BootSplash.storyboard; sourceTree = "<group>"; };
+		787C1D0827FB790600533ECF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "uniontours/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C2124F3DD156EEE587080DC /* libPods-uniontours.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-uniontours.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C77529B21760B44816B5CDFF /* Pods-uniontours-uniontoursTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uniontours-uniontoursTests.debug.xcconfig"; path = "Target Support Files/Pods-uniontours-uniontoursTests/Pods-uniontours-uniontoursTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD55EE1B219B762ACCE04E76 /* Pods-uniontours.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-uniontours.debug.xcconfig"; path = "Target Support Files/Pods-uniontours/Pods-uniontours.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,11 +88,12 @@
 		13B07FAE1A68108700A75B9A /* uniontours */ = {
 			isa = PBXGroup;
 			children = (
+				782C929527FB85DE00177423 /* BootSplash.storyboard */,
+				787C1D0827FB790600533ECF /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = uniontours;
@@ -114,7 +117,6 @@
 				C77529B21760B44816B5CDFF /* Pods-uniontours-uniontoursTests.debug.xcconfig */,
 				744DF7F931655FD62CC1D084 /* Pods-uniontours-uniontoursTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -245,8 +247,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				782C929627FB85DF00177423 /* BootSplash.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				787C1D0927FB790600533ECF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,7 +528,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kemsu.uniontours;
 				PRODUCT_NAME = uniontours;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -550,7 +553,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kemsu.uniontours;
 				PRODUCT_NAME = uniontours;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
