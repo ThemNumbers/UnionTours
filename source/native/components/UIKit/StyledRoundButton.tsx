@@ -41,7 +41,7 @@ const StyledRoundButton: React.FC<Props> = ({
     <TouchableBounce onPress={onPress} style={[styles.container, containerStyle]}>
       <View style={[styles.btnContainer, buttonStyle]}>{icon}</View>
       {title ? (
-        <StyledText size={'xxs'} family={'semibold'} center style={styles.titleText}>
+        <StyledText size={'xs'} family={'semibold'} center style={styles.titleText}>
           {title}
         </StyledText>
       ) : null}

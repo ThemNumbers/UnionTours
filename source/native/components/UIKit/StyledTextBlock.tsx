@@ -87,7 +87,7 @@ const StyledTextBlock: React.FC<StyledTextBlockProps> = ({
       {inBlock && value ? (
         <View style={[styles.blockContainer, bgColorStyle]}>
           <StyledText
-            size={'xxs'}
+            size={'xs'}
             withLinking={withLinking}
             family={'regular'}
             style={[styles.blockText, colorStyle]}

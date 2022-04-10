@@ -19,7 +19,7 @@ const WeekDays: React.FC = React.memo(
         {DAY_NAMES.map((day, index) => (
           <View key={index} style={styles.daysContainer}>
             <StyledText
-              size={'xxs'}
+              size={'xs'}
               family={'semibold'}
               style={{ color: day.isDayOff ? theme.colors.red_5 : theme.colors.gray_7 }}
             >

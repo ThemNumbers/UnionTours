@@ -118,7 +118,7 @@ const TopBar = React.forwardRef<BarRef, Props>(({ initialBar }, ref) => {
       <View style={{ height: insets.top }} />
       {showNetworkBar ? (
         <StyledText
-          size={'xxs'}
+          size={'xs'}
           family={'semibold'}
           style={[styles.text, styles[networkBar.textStyle]]}
           animatedStyle={textStyle}
