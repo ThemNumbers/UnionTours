@@ -1,7 +1,8 @@
 import { observable, makeObservable, action, configure } from 'mobx'
 import { RootStore } from '.'
 import { callApi } from '../../services/ApiService'
-import { TourItem } from '../interfaces/Tours'
+import * as data from './test.json'
+import { Hotel, Tour } from '../interfaces/Tours'
 
 interface City {
   dataId: string
@@ -143,14 +144,24 @@ const cities: City[] = [
   { dataId: '35', dataDepartureId: '2', title: 'Ярославль' },
 ]
 
+const country = {
+  alternativeCountry: 92,
+  disabledBefore: '2021-05-11',
+  id: 76,
+  name: 'Россия',
+  restrictionsUrl:
+    'https://intercom.help/travelata-ac8575273330/ru/articles/4126279-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0-%D0%B7%D0%B0%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-%D1%80%D1%84-covid-19',
+}
 class ToursStore {
   private root: RootStore
-  public tourList: Array<TourItem> = []
+  public tours: Array<Tour> = []
+  public hotels: Array<Hotel> = []
 
   constructor(root: RootStore) {
     this.root = root
     makeObservable(this, {
-      tourList: observable,
+      tours: observable,
+      hotels: observable,
       getToursList: action,
     })
     configure({
@@ -160,9 +171,10 @@ class ToursStore {
 
   public getToursList = () => {
     console.log('test')
-    callApi<Array<TourItem>>({ endpoint: '/tours' }).then((res) => {
-      this.tourList = res.data
-    })
+    this.hotels = data.result.hotels
+    // callApi<Array<TourItem>>({ endpoint: '/tours' }).then((res) => {
+    //   this.tourList = res.data
+    // })
   }
 }
 

@@ -1,2 +1,4 @@
-import { TouchableBounce as TB } from 'react-native/Libraries/Components/Touchable/TouchableBounce'
-export { TB as TouchableBounce }
+import { TouchableOpacity } from 'react-native'
+
+const TouchableBounce: typeof TouchableOpacity = require('react-native/Libraries/Components/Touchable/TouchableBounce')
+export { TouchableBounce }
