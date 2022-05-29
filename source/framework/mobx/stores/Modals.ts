@@ -1,10 +1,10 @@
 import { observable, makeObservable, action, configure } from 'mobx'
 import { RootStore } from '.'
-import { Alert } from '../interfaces/Alerts'
+import { ModalOptions } from '../interfaces/Modals'
 
 class ModalsStore {
   private root: RootStore
-  public modal: any | undefined = undefined
+  public modal: ModalOptions | undefined = undefined
 
   constructor(root: RootStore) {
     this.root = root
@@ -17,7 +17,7 @@ class ModalsStore {
     })
   }
 
-  public setModal = (item: Alert | undefined) => {
+  public setModal = (item: ModalOptions | undefined) => {
     this.modal = item
   }
 }

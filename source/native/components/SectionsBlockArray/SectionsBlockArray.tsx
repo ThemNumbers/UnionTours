@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
 import { StyledSection, StyledSectionProps } from '../UIKit/StyledSection'
 interface Props {

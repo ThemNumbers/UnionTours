@@ -13,9 +13,9 @@ import { CheckBoxIcon } from '../Icons/CheckBoxIcon'
 
 const styles = StyleSheet.create({
   container: {
-    width: 20,
-    height: 20,
-    borderRadius: 3,
+    width: 24,
+    height: 24,
+    borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -2,17 +2,17 @@ import {
   format,
   isToday,
   isTomorrow,
-  getDayOfYear,
   getMonth,
   isBefore,
   setDay,
   differenceInDays,
   differenceInMonths,
-  formatDistanceToNow,
   isSameDay,
   setYear,
   isAfter,
   getYear,
+  formatDistanceToNowStrict,
+  getDate,
 } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
@@ -26,7 +26,7 @@ const parseDate = (date?: string | Date): Date | undefined => {
       return date
     }
     try {
-      const parsed = Date.parse(date)
+      let parsed = Date.parse(date)
 
       if (!isNaN(parsed)) {
         const timestamp = new Date(date)
@@ -68,8 +68,18 @@ const getSelectedRangeText = (
 const isSameDayOfYear = (first?: Date | string, second?: Date | string): boolean => {
   const firstParsedDate = parseDate(first)
   const secondParsedDate = parseDate(second)
+
   if (firstParsedDate && secondParsedDate) {
-    return getDayOfYear(firstParsedDate) === getDayOfYear(secondParsedDate)
+    const fMonth = getMonth(firstParsedDate)
+    const sMonth = getMonth(secondParsedDate)
+    if (fMonth === sMonth) {
+      const fDay = getDate(firstParsedDate)
+      const sDay = getDate(secondParsedDate)
+      if (fDay === sDay) {
+        return true
+      }
+    }
+    return false
   } else {
     return false
   }
@@ -146,7 +156,8 @@ const fromNowDate = (d: Date | string): string => {
   const parsedDate = parseDate(d)
 
   if (parsedDate) {
-    return formatDistanceToNow(parsedDate, {
+    return formatDistanceToNowStrict(parsedDate, {
+      roundingMethod: 'ceil',
       locale: locales.ru,
     })
   } else {

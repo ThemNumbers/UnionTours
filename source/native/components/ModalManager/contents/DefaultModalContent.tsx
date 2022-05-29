@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Theme, useThemeStyles } from '../../../theme'
 import { StyledText } from '../../UIKit/StyledText'

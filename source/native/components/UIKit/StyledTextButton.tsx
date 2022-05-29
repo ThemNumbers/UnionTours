@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleProp, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native'
 import { Theme, useThemeStyles } from '../../theme'
 import { triggerHaptic } from '../../utils/haptic'

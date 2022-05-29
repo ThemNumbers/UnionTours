@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Animated, LayoutChangeEvent, PanResponder, StyleSheet, View } from 'react-native'
 import { ICenterOn, ImageZoomProps, ImageZoomState } from '../types'
 

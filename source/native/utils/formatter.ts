@@ -17,8 +17,7 @@ const parseFullName = (input?: string): string | undefined => {
   if (input) {
     const inputArray = input.split(' ')
     if (inputArray.length === 3) {
-      const lastName = inputArray[0]
-      const firstName = inputArray[1]
+      const [lastName, firstName] = inputArray
       return `${lastName} ${firstName}`
     }
     return input
@@ -84,6 +83,10 @@ const parseTag = (tag: string) => {
   return ''
 }
 
+const formatNDS = (input: string) => {
+  return input.includes('НДС') ? input : `${input} %`
+}
+
 const formatSum = (sum?: number) => {
   return sum !== undefined
     ? `${String(sum)
@@ -102,5 +105,6 @@ export {
   getPlural,
   getRandomPointsFromString,
   parseTag,
+  formatNDS,
   formatSum,
 }

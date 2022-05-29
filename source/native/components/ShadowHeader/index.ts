@@ -1,1 +1,0 @@
-export { ShadowHeader } from './ShadowHeader'

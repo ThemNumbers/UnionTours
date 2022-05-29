@@ -1,7 +1,8 @@
 import React, { createContext, useContext } from 'react'
 import { AlertsStore } from './Alerts'
-import { FavoritesStore } from './Favorites'
+import { FiltersStore } from './Filters'
 import { ModalsStore } from './Modals'
+import { ProfileStore } from './Profile'
 import { ToursStore } from './Tours'
 
 let store: RootStore
@@ -28,9 +29,14 @@ export const useModalsStore = () => {
   return modals
 }
 
-export const useFavoritesStore = () => {
-  const { favorites } = useStores()
-  return favorites
+export const useProfileStore = () => {
+  const { profile } = useStores()
+  return profile
+}
+
+export const useFiltersStore = () => {
+  const { filters } = useStores()
+  return filters
 }
 
 export const useToursStore = () => {
@@ -41,14 +47,16 @@ export const useToursStore = () => {
 export class RootStore {
   alerts: AlertsStore
   modals: ModalsStore
-  favorites: FavoritesStore
+  profile: ProfileStore
   tours: ToursStore
+  filters: FiltersStore
 
   constructor() {
     this.alerts = new AlertsStore(this)
     this.modals = new ModalsStore(this)
-    this.favorites = new FavoritesStore(this)
+    this.profile = new ProfileStore(this)
     this.tours = new ToursStore(this)
+    this.filters = new FiltersStore(this)
   }
 }
 

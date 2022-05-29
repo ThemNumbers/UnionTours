@@ -1,6 +1,11 @@
 /* eslint-disable no-console */
-import { Alert } from '../../framework/mobx/interfaces/Alerts'
-import { logError } from '../../framework/services/AnalyticService'
+import { Alert } from '../../framework/redux/interfaces/Alerts'
+import { UnionRequestScreenType } from '../../framework/redux/interfaces/Jira'
+import { logError } from '../analytic/firebase'
+import { AnalyticTypes } from '../analytic/types'
+import { navigateToDeeplink, navigationRef } from '../navigation/RootNavigation'
+import { Routes } from '../navigation/routes'
+import { IS_PROD } from './constants'
 import { showAlert } from './showAlert'
 
 export interface CustomError {
@@ -10,6 +15,27 @@ export interface CustomError {
   body?: string
   code?: number
   response?: string
+}
+
+const excludeRoutes = [Routes.AuthScreen, Routes.ForgotPassword]
+
+const checkNavigationIsAvailable = () => {
+  if (navigationRef) {
+    const currentRoute = navigationRef.getCurrentRoute()
+    if (currentRoute && excludeRoutes.every((r) => r !== currentRoute.name)) {
+      return true
+    }
+  }
+}
+
+const routeToServiceDesc = (errorString?: string) => {
+  const isAvailable = checkNavigationIsAvailable()
+  if (isAvailable) {
+    navigateToDeeplink(Routes.UnionRequestScreen, {
+      type: UnionRequestScreenType.INCORRECT_WORK,
+      analytic: { type: AnalyticTypes.SERVICE_DESC_ALERT, error: errorString },
+    })
+  }
 }
 
 const errorHandler = (
@@ -39,10 +65,21 @@ const errorHandler = (
       alert.body = 'У вас нет необходимых прав доступа'
       break
   }
-  logError(errorString)
-  console.log('-----------ERROR----------')
-  console.log(errorString)
-  console.log('--------------------------')
+  if (IS_PROD) {
+    logError(errorString)
+  } else {
+    console.log('-----------ERROR----------')
+    console.log(errorString)
+    console.log('--------------------------')
+  }
+
+  const isAvailable = checkNavigationIsAvailable()
+  if (isAvailable) {
+    alert.onPress = () => routeToServiceDesc(errorString)
+    alert.leftBtnText = 'Написать в поддержку'
+    alert.withButtons = true
+    alert.rightBtnText = 'Закрыть'
+  }
   showAlert(alert)
 }
 

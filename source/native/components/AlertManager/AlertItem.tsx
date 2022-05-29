@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
-import { Alert } from '../../../framework/mobx/interfaces/Alerts'
+import { Alert } from '../../../framework/redux/interfaces/Alerts'
 import { Theme, useThemeStyles } from '../../theme'
 import { ErrorIcon } from '../Icons/Alert/ErrorIcon'
 import { InfoIcon } from '../Icons/Alert/InfoIcon'
@@ -22,7 +22,7 @@ const createStyles = (theme: Theme) => {
       minHeight: 48,
       borderRadius: 8,
       paddingVertical: 12,
-      alignItems: 'flex-start',
+      alignItems: 'center',
       paddingHorizontal: 16,
       flexDirection: 'row',
       backgroundColor: theme.colors.gray_1,
@@ -34,6 +34,7 @@ const createStyles = (theme: Theme) => {
     iconContainer: {
       width: 24,
       height: 24,
+      alignSelf: 'flex-start',
       alignItems: 'center',
       justifyContent: 'center',
     },

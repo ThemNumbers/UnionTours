@@ -65,7 +65,7 @@ const ModalManager: React.FC = () => {
           animationInTiming: 500,
           animationOutTiming: 1,
           backdropTransitionInTiming: 500,
-          propagateSwipe: false,
+          propagateSwipe: true,
           style: undefined,
         }
 

@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react'
 import React, { useCallback, useEffect, useRef } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Swipeable } from 'react-native-gesture-handler'
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const AlertManager = observer<React.FC>(() => {
+const AlertManager: React.FC = () => {
   const { alert, setAlert } = useAlertsStore()
   const insets = useSafeAreaInsets()
   const snapPoints = [-insets.top - 32 - 200, 0]
@@ -92,6 +91,6 @@ const AlertManager = observer<React.FC>(() => {
       </Swipeable>
     </Animated.View>
   ) : null
-})
+}
 
 export { AlertManager }

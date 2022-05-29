@@ -7,6 +7,8 @@ const APP_VERSION = getVersion()
 
 const IS_IOS = Platform.OS === 'ios'
 
+const API_HOST = 'https://api.russpass.ru/cmsapi/'
+
 const SHOULD_NOT_UPDATE = true
 
 const DATE_FILTERS_ARRAY = ['За все время', 'За сутки', 'За неделю', 'За месяц', 'За квартал']
@@ -18,6 +20,7 @@ export {
   DEVICE_ID,
   APP_VERSION,
   IS_IOS,
+  API_HOST,
   DATE_FILTERS_ARRAY,
   SHOULD_NOT_UPDATE,
   keyExtractor,

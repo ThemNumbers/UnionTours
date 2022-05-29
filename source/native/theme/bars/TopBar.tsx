@@ -40,7 +40,6 @@ const createStyles = (theme: Theme) => {
 export const getConnectionStatusConfig = (status: ConnectionStatus): ConnectionStatusConfig => {
   switch (status) {
     case ConnectionStatus.GOOD:
-    case ConnectionStatus.UNKNOWN:
       return {
         text: 'Связь установлена',
         textStyle: 'light',
@@ -86,8 +85,7 @@ const TopBar = React.forwardRef<BarRef, Props>(({ initialBar }, ref) => {
   }))
 
   useEffect(() => {
-    const goodNetworkArray = [ConnectionStatus.GOOD, ConnectionStatus.UNKNOWN]
-    const animToValue = goodNetworkArray.some((i) => i === connectionStatus) ? 0 : 32
+    const animToValue = ConnectionStatus.GOOD === connectionStatus ? 0 : 32
     if (animToValue !== animHeight.value) {
       if (animToValue === 32) {
         setShowNetworkBar(true)

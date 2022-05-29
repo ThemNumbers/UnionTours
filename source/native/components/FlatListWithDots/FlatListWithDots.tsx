@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useCallback } from 'react'
 import {
   View,
   FlatListProps,
@@ -26,7 +26,7 @@ const FlatListWithDots: React.FC<Props> = ({ containerStyle, ...props }) => {
     ? [...Array(props.data ? props.data.length : 0)].map((x, i) => (i ? i * (width - 24) : 0))
     : []
 
-  const keyExtractor = React.useCallback((item, index) => `list-item-${index}`, [])
+  const keyExtractor = useCallback((item, index) => `list-item-${index}`, [])
 
   return (
     <View style={containerStyle}>

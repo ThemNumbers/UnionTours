@@ -2,14 +2,14 @@ import { useRef } from 'react'
 
 export function useDebounce(wait = 400, leading = false) {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const func = useRef<any | null>(null)
+  const func = useRef<Function | null>(null)
 
   const _clearTimer = () => {
     timer.current && clearTimeout(timer.current)
     timer.current = null
   }
 
-  return (newFunction: () => void, scope?: () => void, args?: Array<object>) => {
+  return (newFunction: Function, scope?: Function, args?: Array<object>) => {
     // Leading (Call on first)
     if (leading === true) {
       func.current = newFunction

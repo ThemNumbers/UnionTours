@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Theme, useThemeStyles } from '../../../theme'
 import { FilledStarIcon } from '../../Icons/FilledStarIcon'
@@ -11,28 +11,18 @@ const createStyles = (theme: Theme) => {
     container: {
       width: '100%',
       marginHorizontal: 24,
-      paddingHorizontal: 20,
-      paddingTop: 32,
+      paddingHorizontal: 16,
+      paddingTop: 24,
       paddingBottom: 16,
       borderRadius: 16,
       alignSelf: 'center',
       backgroundColor: theme.colors.gray_1,
     },
-    iconContainer: {
-      width: 32,
-      height: 32,
-      borderRadius: 32,
-      marginBottom: 8,
-      alignSelf: 'center',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: theme.colors.blue_6,
-    },
-    title: { marginTop: 8, color: theme.colors.gray_9 },
-    description: { marginTop: 8, color: theme.colors.gray_7 },
+    title: { marginTop: 16, color: theme.colors.gray_9 },
+    description: { marginTop: 8, paddingHorizontal: 8, color: theme.colors.gray_7 },
     checkboxesWrapper: { marginTop: 16 },
-    checkboxContainer: { flexDirection: 'row', paddingVertical: 12, alignItems: 'center' },
-    checkboxTextPadding: { paddingLeft: 10, color: theme.colors.gray_9 },
+    checkboxContainer: { flexDirection: 'row', padding: 8, marginBottom: 4, alignItems: 'center' },
+    checkboxTextPadding: { paddingLeft: 16, color: theme.colors.gray_9 },
     acceptBtnContainer: { marginTop: 16 },
     cancelBtnContainer: { marginTop: 8 },
   })
@@ -49,22 +39,22 @@ interface Props {
 
 const AddFavoriteModalContent: React.FC<Props> = ({ firstName, isDelete, onAccept, hideModal }) => {
   const { theme, styles } = useThemeStyles(createStyles)
-  const [birthdayCheckbox, setBirthdayCheckbox] = React.useState<boolean>(true)
-  const [holidayCheckbox, setHolidayCheckbox] = React.useState<boolean>(true)
+  const [birthdayCheckbox, setBirthdayCheckbox] = useState<boolean>(true)
+  const [holidayCheckbox, setHolidayCheckbox] = useState<boolean>(true)
 
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <FilledStarIcon size={16} color={theme.colors.gray_1} />
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <FilledStarIcon size={32} color={theme.colors.blue_6} />
+        <StyledText size={'m'} family={'bold'} center style={styles.title}>
+          {isDelete ? 'Удалить из избранного?' : 'Добавить в избранное?'}
+        </StyledText>
+        <StyledText size={'m'} family={'regular'} center style={styles.description}>
+          {isDelete
+            ? `${firstName} будет удалён(а) из списка избранных контактов, а уведомления о нём(ней) отключены`
+            : 'Выберите уведомления, которые хотите получать об избранном контакте'}
+        </StyledText>
       </View>
-      <StyledText size={'l'} family={'bold'} center style={styles.title}>
-        {isDelete ? 'Удалить из избранного?' : 'Добавить в избранное?'}
-      </StyledText>
-      <StyledText size={'xs'} family={'semibold'} center style={styles.description}>
-        {isDelete
-          ? `${firstName} будет удалён(а) из списка избранных контактов, а уведомления о нём(ней) отключены`
-          : 'Выберите уведомления, которые хотите получать об избранном контакте'}
-      </StyledText>
 
       {isDelete ? null : (
         <View style={styles.checkboxesWrapper}>
@@ -73,7 +63,7 @@ const AddFavoriteModalContent: React.FC<Props> = ({ firstName, isDelete, onAccep
             style={styles.checkboxContainer}
           >
             <StyledCheckBox checkBoxState={birthdayCheckbox} />
-            <StyledText size={'xs'} family={'semibold'} style={styles.checkboxTextPadding}>
+            <StyledText size={'m'} family={'medium'} style={styles.checkboxTextPadding}>
               День рождения
             </StyledText>
           </TouchableOpacity>
@@ -82,7 +72,7 @@ const AddFavoriteModalContent: React.FC<Props> = ({ firstName, isDelete, onAccep
             style={styles.checkboxContainer}
           >
             <StyledCheckBox checkBoxState={holidayCheckbox} />
-            <StyledText size={'xs'} family={'semibold'} style={styles.checkboxTextPadding}>
+            <StyledText size={'m'} family={'medium'} style={styles.checkboxTextPadding}>
               Отпуск
             </StyledText>
           </TouchableOpacity>
@@ -94,7 +84,7 @@ const AddFavoriteModalContent: React.FC<Props> = ({ firstName, isDelete, onAccep
           onAccept(birthdayCheckbox, holidayCheckbox)
           hideModal()
         }}
-        activeBgColor={isDelete ? theme.colors.gray_1 : theme.colors.blue_6}
+        activeBgColor={isDelete ? theme.colors.gray_2 : theme.colors.blue_6}
         activeTextColor={isDelete ? theme.colors.red_6 : theme.colors.gray_1}
         containerStyle={styles.acceptBtnContainer}
       />

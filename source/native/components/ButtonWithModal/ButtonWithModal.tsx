@@ -4,9 +4,9 @@ import { showCustomModal } from '../../utils/showModal'
 import { useConnectionStatus } from '../../hooks/useConnectionStatus'
 import { useIsMounted } from '../../hooks/useIsMounted'
 import { ButtonsModalContent } from '../ModalManager/contents/ButtonsModalContent'
-import { CommentModalContent } from '../ModalManager/contents/CommentModalContent'
 import { DefaultModalContent } from '../ModalManager/contents/DefaultModalContent'
 import { StyledButton } from '../UIKit/StyledButton'
+import { FeedbackModalContent } from '../ModalManager/contents/FeedbackModalContent'
 
 export interface IButtonWithModal {
   title: string
@@ -22,7 +22,10 @@ export interface IButtonWithModal {
   inputPlaceholder?: string
   activeBgColor?: string
   activeTextColor?: string
+  withAttachments?: boolean
+  countAttachments?: number
   selectModalButtons?: Array<{ title: string; key: string }>
+  renderIcon?: (color: string) => React.ReactNode
   onConfirm: (data?: any) => Promise<void>
   onNavigate?: (onConfirm: (data?: any) => Promise<void>, data?: any) => void
 }
@@ -72,14 +75,18 @@ const ButtonWithModal: React.FC<Props> = ({ buttonIdx, button, onProcessIndex })
         )
       case 'comment':
         return (
-          <CommentModalContent
+          <FeedbackModalContent
             title={button.modalTitle}
             buttonTitle={button.modalRightBtnText || button.title}
-            requiredText={button.requiredText}
             inputIsRequired={button.inputIsRequired}
+            requiredText={button.requiredText}
             inputPlaceholder={button.inputPlaceholder || ''}
-            onPress={(comment) => processResult({ comment, result: button.returnKey })}
+            withAttachments={button.withAttachments}
+            countAttachments={button.countAttachments}
             hideModal={hideModal}
+            onConfirm={(comment, attachments) =>
+              processResult({ comment, attachments, result: button.returnKey })
+            }
           />
         )
       case 'default':
@@ -118,6 +125,7 @@ const ButtonWithModal: React.FC<Props> = ({ buttonIdx, button, onProcessIndex })
     <StyledButton
       containerStyle={button.style}
       activeBgColor={button.activeBgColor}
+      renderIcon={button.renderIcon}
       activeTextColor={button.activeTextColor}
       disabled={button.isDisabled}
       loading={isLoading}

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-unused-styles */
-import * as React from 'react'
+import React from 'react'
 import { View, ViewStyle, StyleProp, StyleSheet } from 'react-native'
 import { IS_IOS } from '../../utils/constants'
 
@@ -25,9 +25,10 @@ const styles = StyleSheet.create({
     shadowRadius: 40,
     elevation: 20,
   },
+  none: {},
 })
 
-type ShadowType = 'hard' | 'medium' | 'light'
+type ShadowType = 'hard' | 'medium' | 'light' | 'none'
 interface Props {
   style: StyleProp<ViewStyle>
   type: ShadowType

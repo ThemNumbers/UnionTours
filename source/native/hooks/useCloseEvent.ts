@@ -11,7 +11,7 @@ export const useCloseEvent = (callback: () => void) => {
     })
 
     return () => {
-      navigation.removeListener('beforeRemove', () => null)
+      navigation.removeListener('beforeRemove', () => {})
     }
   }, [callback, navigation])
 }

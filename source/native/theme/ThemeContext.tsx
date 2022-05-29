@@ -59,7 +59,7 @@ const ThemeProvider: React.FC<Props> = React.memo((props) => {
     <Context.Provider value={memoizedValue}>
       <BarsWrapper
         initialTopBar={{
-          color: theme.colors.gray_2,
+          color: theme.colors.gray_1,
           style: 'dark-content',
         }}
         initialBottomBar={{

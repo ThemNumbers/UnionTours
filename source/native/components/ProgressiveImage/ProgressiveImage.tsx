@@ -13,9 +13,9 @@ import {
 import { ResizeMode } from 'react-native-fast-image'
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
 import { Theme, useThemeStyles } from '../../theme'
+import { HomeStackParamsList } from '../../navigation/Home/HomeStack'
 import { Routes } from '../../navigation/routes'
 import { useIsMounted } from '../../hooks/useIsMounted'
-import { HomeStackParamsList } from '../../navigation/stacks/HomeStack'
 
 const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({

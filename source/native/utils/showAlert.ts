@@ -9,5 +9,5 @@ export const showAlert = (alert: Alert) => {
       ? 'notificationWarning'
       : 'notificationSuccess'
   triggerHaptic(hapticType)
-  //stores.dispatch(createAlert({ ...alert, id: generateUniqId() }))
+  //store.dispatch(createAlert({ ...alert, id: generateUniqId() }))
 }

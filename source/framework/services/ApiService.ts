@@ -1,3 +1,4 @@
+import { API_HOST } from '../../native/utils/constants'
 import { Pending } from '../mobx/interfaces/Tours'
 
 export interface ResponseObject<T> {
@@ -8,10 +9,6 @@ interface RequestParams {
   endpoint: string
   options?: RequestInit
 }
-
-const API_HOST = 'https://gateway.travelata.ru/apiV1/'
-
-//https://api-gateway.travelata.ru/frontend/tours?limit=2000&departureCity=2&country=92&checkInDateRange%5Bfrom%5D=2022-04-20&checkInDateRange%5Bto%5D=2022-04-20&nightRange%5Bfrom%5D=7&nightRange%5Bto%5D=8&touristGroup%5Badults%5D=2&touristGroup%5Bkids%5D=0&touristGroup%5Binfants%5D=0&priceRange%5Bfrom%5D=6000&priceRange%5Bto%5D=50000000&commandUuid=476f84ef-6098-4436-bad8-b4caa56b3b46&trSm=1&sections%5B%5D=hotels&sections%5B%5D=countries&sections%5B%5D=firstPaymentDefinitions&sections%5B%5D=operators&sections%5B%5D=sortRate
 
 const parseResponse = (response: Response): Promise<{ data: any; pending: Pending }> => {
   if (response.status === 200 || response.status === 201) {

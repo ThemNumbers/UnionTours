@@ -1,38 +1,35 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import { BackArrowIcon } from '../Icons/BackArrowIcon'
 import { Theme, useThemeStyles } from '../../theme'
-import { FilterIcon } from '../Icons/FilterIcon'
 import { StyledText } from '../UIKit/StyledText'
+import { IIconProps } from '../Icons/IIconProps'
 
 const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({
     container: {
       width: '100%',
       height: 56,
-      justifyContent: 'center',
-      marginTop: 12,
-    },
-    title: { color: theme.colors.gray_9 },
-    contentContainer: {
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.gray_3,
       flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
     },
-    backBtnContainer: {
-      paddingHorizontal: 16,
+    title: {
+      color: theme.colors.gray_9,
+      flex: 1,
+    },
+    contentContainer: { flexDirection: 'row', alignItems: 'center', flex: 1 },
+    actionsWrapper: { alignItems: 'center', flexDirection: 'row' },
+    btnContainer: {
+      paddingLeft: 16,
+      paddingRight: 16,
       height: '100%',
       alignItems: 'center',
       justifyContent: 'center',
     },
-    titleContainer: {
-      position: 'absolute',
-      left: 56,
-      right: 56,
-      zIndex: 0,
-    },
-    filtersBtnContainer: {
+    actionContainer: {
       paddingHorizontal: 16,
       height: '100%',
       alignItems: 'center',
@@ -52,26 +49,28 @@ const createStyles = (theme: Theme) => {
   return styles
 }
 
+export interface HeaderActionItem {
+  text?: string
+  icon?: React.FC<IIconProps>
+  color?: string
+  showIndicator?: boolean
+  onPress: () => void
+}
+
 interface Props {
-  title: string
-  customTitle?: React.ReactNode
-  customRightButton?: React.ReactNode
-  filterIsActivated?: boolean
-  showFilters?: boolean
+  title?: string
+  hideBackButton?: boolean
   containerStyle?: StyleProp<ViewStyle>
-  onPressLeftButton?: () => void
-  onFilterPress?: () => void
+  onBackPress?: () => void
+  rightActions?: Array<HeaderActionItem>
 }
 
 const DefaultHeader: React.FC<Props> = ({
   title,
-  customTitle,
-  customRightButton,
-  filterIsActivated,
-  showFilters,
+  hideBackButton,
   containerStyle,
-  onPressLeftButton,
-  onFilterPress,
+  onBackPress,
+  rightActions,
 }) => {
   const { theme, styles } = useThemeStyles(createStyles)
   const navigation = useNavigation()
@@ -80,33 +79,43 @@ const DefaultHeader: React.FC<Props> = ({
     <View style={[styles.container, containerStyle]}>
       <View style={styles.contentContainer}>
         <TouchableOpacity
-          style={styles.backBtnContainer}
-          onPress={onPressLeftButton ? onPressLeftButton : () => navigation.goBack()}
+          style={styles.btnContainer}
+          disabled={hideBackButton}
+          onPress={onBackPress ? onBackPress : () => navigation.goBack()}
         >
-          <BackArrowIcon color={theme.colors.gray_9} />
+          {hideBackButton ? (
+            <View style={{ width: 24, height: 24 }} />
+          ) : (
+            <BackArrowIcon color={theme.colors.gray_9} />
+          )}
         </TouchableOpacity>
 
-        <View pointerEvents={'none'} style={styles.titleContainer}>
-          {customTitle ? (
-            customTitle
-          ) : (
-            <StyledText size={'l'} family={'bold'} numberOfLines={2} center style={styles.title}>
-              {title}
-            </StyledText>
-          )}
-        </View>
-
-        {customRightButton ? (
-          customRightButton
-        ) : showFilters ? (
-          <TouchableOpacity style={styles.filtersBtnContainer} onPress={onFilterPress}>
-            <View>
-              <FilterIcon color={theme.colors.gray_9} />
-              {filterIsActivated ? <View style={styles.dot} /> : null}
-            </View>
-          </TouchableOpacity>
+        {title ? (
+          <StyledText size={'l'} family={'semibold'} numberOfLines={2} center style={styles.title}>
+            {title}
+          </StyledText>
         ) : null}
       </View>
+
+      {rightActions ? (
+        <View style={styles.actionsWrapper}>
+          {rightActions.map((action, idx) => (
+            <TouchableOpacity key={idx} style={styles.actionContainer} onPress={action.onPress}>
+              <View>
+                {action.icon ? (
+                  <action.icon
+                    color={action.color || theme.colors.gray_9}
+                    size={24}
+                    width={24}
+                    height={24}
+                  />
+                ) : null}
+                {action.showIndicator ? <View style={styles.dot} /> : null}
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+      ) : null}
     </View>
   )
 }

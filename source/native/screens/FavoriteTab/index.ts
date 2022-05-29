@@ -1,0 +1,1 @@
+export { FavoriteTabScreen } from './FavoriteTabScreen'

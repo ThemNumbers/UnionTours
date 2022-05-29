@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
 import { Theme, useThemeStyles } from '../../theme'
 import { TouchableBounce } from '../TouchableBounce'

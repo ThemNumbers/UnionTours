@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { I18nManager, StyleSheet, useWindowDimensions, View } from 'react-native'
 import { ImageZoom } from './modules/ImageZoom'
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
@@ -41,7 +41,7 @@ export interface ImageViewerRef {
   changeIndex: (index: number) => void
 }
 
-const ImageViewer = React.forwardRef<ImageViewerRef, ImageViewerProps>(
+const ImageViewer = forwardRef<ImageViewerRef, ImageViewerProps>(
   (
     {
       imageUrls = [],
@@ -65,15 +65,13 @@ const ImageViewer = React.forwardRef<ImageViewerRef, ImageViewerProps>(
     },
     ref
   ) => {
-    const [currentShowIndex, setCurrentShowIndex] = React.useState<number>(initialIndex || 0)
+    const [currentShowIndex, setCurrentShowIndex] = useState<number>(initialIndex || 0)
     const { width, height } = useWindowDimensions()
-    const positionXNumber = React.useRef<number>(
-      width * currentShowIndex * (I18nManager.isRTL ? 1 : -1)
-    )
-    const standardPositionX = React.useRef<number>(positionXNumber.current)
+    const positionXNumber = useRef<number>(width * currentShowIndex * (I18nManager.isRTL ? 1 : -1))
+    const standardPositionX = useRef<number>(positionXNumber.current)
     const positionX = useSharedValue(positionXNumber.current)
 
-    React.useImperativeHandle(ref, () => ({
+    useImperativeHandle(ref, () => ({
       changeIndex: (index: number) => {
         setCurrentShowIndex(index)
         positionXNumber.current = width * index * (I18nManager.isRTL ? 1 : -1)

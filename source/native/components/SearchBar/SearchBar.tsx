@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { StyleProp, ViewStyle, TextInputProps, View, StyleSheet } from 'react-native'
 import { Theme, useThemeStyles } from '../../theme'
 import { IStyledTextInputRef, StyledTextInput } from '../UIKit/StyledTextInput'
@@ -59,9 +59,9 @@ const SearchBar: React.FC<Props> = ({
 }) => {
   const { theme, styles } = useThemeStyles(createStyles)
   const anim = useSharedValue(0)
-  const inputRef = React.useRef<IStyledTextInputRef | null>(null)
+  const inputRef = useRef<IStyledTextInputRef | null>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const toValue = inputProps.value && inputProps.value.length ? 1 : 0
     anim.value = withTiming(toValue, { duration: 300 })
   }, [inputProps.value, anim])

@@ -1,0 +1,1 @@
+export { MainTabScreen } from './MainTabScreen'

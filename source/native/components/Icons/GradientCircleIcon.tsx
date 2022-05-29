@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg'
 import { IIconProps } from './IIconProps'
 

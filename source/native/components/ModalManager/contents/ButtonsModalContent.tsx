@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Theme, useThemeStyles } from '../../../theme'

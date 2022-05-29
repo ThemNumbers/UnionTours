@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import {
   StyleProp,
   StyleSheet,
@@ -31,8 +31,9 @@ const createStyles = (theme: Theme) => {
       margin: 0,
       padding: 0,
       flex: 1,
-      fontSize: 15,
+      fontSize: 16,
       fontFamily: 'Inter-Regular',
+      includeFontPadding: false,
       color: theme.colors.gray_9,
     },
   })
@@ -47,6 +48,7 @@ export interface IStyledTextInput {
   containerStyle?: StyleProp<ViewStyle>
   inputContainerStyle?: StyleProp<ViewStyle>
   rightOption?: React.ReactNode
+  leftOption?: React.ReactNode
   onFocus?: () => void
   onBlur?: () => void
 }
@@ -56,7 +58,7 @@ export interface IStyledTextInputRef {
   blur: () => void
 }
 
-const StyledTextInput = React.forwardRef<IStyledTextInputRef, IStyledTextInput>(
+const StyledTextInput = forwardRef<IStyledTextInputRef, IStyledTextInput>(
   (
     {
       label,
@@ -66,22 +68,23 @@ const StyledTextInput = React.forwardRef<IStyledTextInputRef, IStyledTextInput>(
       containerStyle,
       inputContainerStyle,
       rightOption,
+      leftOption,
       onBlur,
       onFocus,
     },
     ref
   ) => {
-    const [isFocused, setIsFocused] = React.useState<boolean>(false)
-    const inputRef = React.useRef<TextInput | null>(null)
+    const [isFocused, setIsFocused] = useState<boolean>(false)
+    let inputRef = useRef<TextInput | null>(null)
     const { theme, styles } = useThemeStyles(createStyles)
     const { keyboardOpened } = useKeyboard()
 
-    React.useImperativeHandle(ref, () => ({
+    useImperativeHandle(ref, () => ({
       focus: () => inputRef.current && inputRef.current.focus(),
       blur: () => inputRef.current && inputRef.current.blur(),
     }))
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (!keyboardOpened) {
         inputRef.current && inputRef.current.blur()
       }
@@ -106,6 +109,7 @@ const StyledTextInput = React.forwardRef<IStyledTextInputRef, IStyledTextInput>(
             inputContainerStyle,
           ]}
         >
+          {leftOption ? leftOption : null}
           <TextInput
             ref={(textInputRef) => (inputRef.current = textInputRef)}
             placeholderTextColor={theme.colors.gray_6}

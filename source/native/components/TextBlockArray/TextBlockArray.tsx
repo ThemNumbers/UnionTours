@@ -1,6 +1,6 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
-import { Pending } from '../../../framework/mobx/interfaces/Tours'
+import { Pending } from '../../../framework/redux/interfaces/News'
 import { Theme, useThemeStyles } from '../../theme'
 import { StyledText } from '../UIKit/StyledText'
 import { StyledTextBlock, StyledTextBlockProps } from '../UIKit/StyledTextBlock'

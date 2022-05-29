@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native'
 import { Theme, useThemeStyles } from '../../../theme'
 import { StyledButton } from '../../UIKit/StyledButton'

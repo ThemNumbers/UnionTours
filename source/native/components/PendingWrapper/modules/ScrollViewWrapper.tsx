@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { View, ScrollView, RefreshControl, useWindowDimensions, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({ container: { flex: 1 } })

@@ -6,12 +6,11 @@ import { Theme, useThemeStyles } from '../../theme'
 
 const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({
-    xxs: { fontSize: 12, lineHeight: 16 },
-    xs: { fontSize: 13, lineHeight: 24 },
-    s: { fontSize: 14, lineHeight: 24 },
-    m: { fontSize: 15, lineHeight: 24 },
-    l: { fontSize: 18, lineHeight: 24 },
-    xl: { fontSize: 22, lineHeight: 32 },
+    xs: { fontSize: 12, lineHeight: 16 },
+    s: { fontSize: 14, lineHeight: 20 },
+    m: { fontSize: 16, lineHeight: 24 },
+    l: { fontSize: 20, lineHeight: 28 },
+    xl: { fontSize: 24, lineHeight: 32 },
     xxl: { fontSize: 30, lineHeight: 40 },
     bold: { fontFamily: 'Inter-Bold' },
     semibold: { fontFamily: 'Inter-SemiBold' },
@@ -24,7 +23,7 @@ const createStyles = (theme: Theme) => {
   return styles
 }
 
-type FontSizeType = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
+type FontSizeType = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
 type FontFamilyType = 'bold' | 'semibold' | 'regular' | 'medium'
 
 interface Props extends TextProps {
@@ -38,12 +37,9 @@ interface Props extends TextProps {
 const StyledText: React.FC<React.PropsWithChildren<Props>> = (props) => {
   const { styles } = useThemeStyles(createStyles)
 
-  const onLinkPress = (link: string) => {
-    Linking.openURL(link)
-  }
-
   return props.withLinking ? (
     <HyperlinkedText
+      //@ts-ignore
       allowFontScaling={false}
       ellipsizeMode={'tail'}
       {...props}
@@ -54,7 +50,7 @@ const StyledText: React.FC<React.PropsWithChildren<Props>> = (props) => {
         props.style,
       ]}
       linkStyle={[styles.linkTextStyle]}
-      onLinkPress={onLinkPress}
+      onLinkPress={(href) => Linking.openURL(href)}
     >
       {props.children}
     </HyperlinkedText>

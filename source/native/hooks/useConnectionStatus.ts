@@ -10,13 +10,10 @@ enum ConnectionStatus {
   GOOD = 'GOOD',
   NORMAL = 'NORMAL',
   BAD = 'BAD',
-  UNKNOWN = 'UNKNOWN',
 }
 
 const useConnectionStatus = () => {
-  const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>(
-    ConnectionStatus.UNKNOWN
-  )
+  const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>(ConnectionStatus.GOOD)
   const appStateRef = useRef<AppStateStatus>('active')
   const canMakeRequest = [ConnectionStatus.NORMAL, ConnectionStatus.GOOD].some(
     (s) => s === connectionStatus
