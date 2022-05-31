@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
-import { Alert } from '../../../framework/redux/interfaces/Alerts'
+import { Alert } from '../../../framework/mobx/interfaces/Alerts'
 import { Theme, useThemeStyles } from '../../theme'
 import { ErrorIcon } from '../Icons/Alert/ErrorIcon'
 import { InfoIcon } from '../Icons/Alert/InfoIcon'
@@ -29,8 +29,8 @@ const createStyles = (theme: Theme) => {
     },
     title: { color: theme.colors.gray_9 },
     textContainer: { flex: 1, marginLeft: 8 },
-    leftBtnText: { color: theme.colors.blue_6 },
-    rightBtnText: { color: theme.colors.blue_6, marginLeft: 24 },
+    leftBtnText: { color: theme.colors.cyan_6 },
+    rightBtnText: { color: theme.colors.cyan_6, marginLeft: 24 },
     iconContainer: {
       width: 24,
       height: 24,

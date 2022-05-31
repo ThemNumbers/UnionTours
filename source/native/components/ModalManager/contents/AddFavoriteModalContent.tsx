@@ -45,7 +45,7 @@ const AddFavoriteModalContent: React.FC<Props> = ({ firstName, isDelete, onAccep
   return (
     <View style={styles.container}>
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <FilledStarIcon size={32} color={theme.colors.blue_6} />
+        <FilledStarIcon size={32} color={theme.colors.cyan_6} />
         <StyledText size={'m'} family={'bold'} center style={styles.title}>
           {isDelete ? 'Удалить из избранного?' : 'Добавить в избранное?'}
         </StyledText>
@@ -84,7 +84,7 @@ const AddFavoriteModalContent: React.FC<Props> = ({ firstName, isDelete, onAccep
           onAccept(birthdayCheckbox, holidayCheckbox)
           hideModal()
         }}
-        activeBgColor={isDelete ? theme.colors.gray_2 : theme.colors.blue_6}
+        activeBgColor={isDelete ? theme.colors.gray_2 : theme.colors.cyan_6}
         activeTextColor={isDelete ? theme.colors.red_6 : theme.colors.gray_1}
         containerStyle={styles.acceptBtnContainer}
       />
@@ -92,7 +92,7 @@ const AddFavoriteModalContent: React.FC<Props> = ({ firstName, isDelete, onAccep
         title={'Отмена'}
         onPress={hideModal}
         activeBgColor={theme.colors.gray_1}
-        activeTextColor={theme.colors.blue_6}
+        activeTextColor={theme.colors.cyan_6}
         containerStyle={styles.cancelBtnContainer}
       />
     </View>

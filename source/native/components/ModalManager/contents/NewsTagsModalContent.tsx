@@ -78,7 +78,7 @@ const NewsTagsModalContent: React.FC<Props> = ({
         key={index}
         style={[
           styles.tagWrapper,
-          { backgroundColor: isSelected ? theme.colors.blue_6 : theme.colors.gray_3 },
+          { backgroundColor: isSelected ? theme.colors.cyan_6 : theme.colors.gray_3 },
         ]}
       >
         <StyledText
@@ -120,7 +120,7 @@ const NewsTagsModalContent: React.FC<Props> = ({
           hideModal()
         }}
         activeBgColor={theme.colors.gray_1}
-        activeTextColor={theme.colors.blue_6}
+        activeTextColor={theme.colors.cyan_6}
         containerStyle={[styles.cancelBtnContainer, { marginBottom: insets.bottom + 16 }]}
       />
     </View>

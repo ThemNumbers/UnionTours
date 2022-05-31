@@ -72,8 +72,8 @@ const DatePickerContent: React.FC<Props> = ({
   const { theme, styles } = useThemeStyles(createStyles)
   const [yearValues] = useState(getYearValues(minYear, maxYear))
   const [prepareReady, setPrepareReady] = useState<boolean>(false)
-  let month = useRef<number>(initialDate.getMonth())
-  let year = useRef<number>(initialDate.getFullYear())
+  const month = useRef<number>(initialDate.getMonth())
+  const year = useRef<number>(initialDate.getFullYear())
 
   // Хак, чтобы избежать лагов во время открытия модального окна
   useEffect(() => {
@@ -132,7 +132,7 @@ const DatePickerContent: React.FC<Props> = ({
             hideModal()
           }}
           activeBgColor={theme.colors.gray_1}
-          activeTextColor={theme.colors.blue_6}
+          activeTextColor={theme.colors.cyan_6}
           containerStyle={styles.acceptBtnContainer}
         />
       </View>
@@ -140,7 +140,7 @@ const DatePickerContent: React.FC<Props> = ({
         title={'Отмена'}
         onPress={hideModal}
         activeBgColor={theme.colors.gray_1}
-        activeTextColor={theme.colors.blue_6}
+        activeTextColor={theme.colors.cyan_6}
         containerStyle={styles.cancelBtnContainer}
       />
     </View>

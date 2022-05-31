@@ -54,7 +54,7 @@ const StyledTile: React.FC<Props> = ({ title, description, getIconByType, onPres
     <TouchableBounce onPress={onPress} style={[styles.container, sizeStyle]}>
       <ShadowView type={'hard'} style={styles.shadowWrapper}>
         <View style={styles.iconContainer}>
-          <GradientIconWrapper color={theme.colors.blue_6} style={{ position: 'absolute' }} />
+          <GradientIconWrapper color={theme.colors.cyan_6} style={{ position: 'absolute' }} />
           <Icon color={theme.colors.gray_1} />
         </View>
         <StyledText size={'s'} family={'medium'} style={styles.titleStyle}>

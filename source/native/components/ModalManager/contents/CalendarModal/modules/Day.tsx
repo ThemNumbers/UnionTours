@@ -18,10 +18,10 @@ const createStyles = (theme: Theme) => {
     dotContainer: { position: 'absolute', bottom: 8, flexDirection: 'row' },
     activeStyle: { backgroundColor: theme.colors.blue_1, borderRadius: 0 },
     text: { color: theme.colors.gray_9 },
-    edgeStyle: { backgroundColor: theme.colors.blue_6 },
+    edgeStyle: { backgroundColor: theme.colors.cyan_6 },
     edgeTextStyle: { color: theme.colors.gray_1 },
     hiddenTextStyle: { color: theme.colors.gray_7 },
-    activeTextStyle: { color: theme.colors.blue_6 },
+    activeTextStyle: { color: theme.colors.cyan_6 },
   })
 
   return styles

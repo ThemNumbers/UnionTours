@@ -13,8 +13,8 @@ const createStyles = (theme: Theme) => {
     label: { color: theme.colors.gray_7, flex: 1 },
     titleContainer: { flexDirection: 'row', alignItems: 'center' },
     loadingContainer: { width: 24, height: 24, justifyContent: 'flex-end' },
-    rightActionText: { color: theme.colors.blue_6 },
-    blockText: { color: theme.colors.blue_6 },
+    rightActionText: { color: theme.colors.cyan_6 },
+    blockText: { color: theme.colors.cyan_6 },
     valueText: { color: theme.colors.gray_9 },
     blockContainer: {
       paddingVertical: 4,

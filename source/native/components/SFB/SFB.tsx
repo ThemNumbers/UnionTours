@@ -16,7 +16,7 @@ export interface SFBReturnData {
 const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({
     container: { flex: 1 },
-    activeMarkBgColor: { backgroundColor: theme.colors.blue_6 },
+    activeMarkBgColor: { backgroundColor: theme.colors.cyan_6 },
     inActiveMarkBgColor: { backgroundColor: theme.colors.gray_3 },
     activeMarkTextColor: { color: theme.colors.gray_1 },
     inActiveMarkTextColor: { color: theme.colors.gray_8 },

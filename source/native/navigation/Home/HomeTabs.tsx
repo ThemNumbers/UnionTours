@@ -7,6 +7,7 @@ import { MainTabIcon } from '../../components/Icons/TabBar/MainTabIcon'
 import { EmployeeTabIcon } from '../../components/Icons/TabBar/EmployeeTabIcon'
 import { IS_IOS } from '../../utils/constants'
 import { ProfileTabIcon } from '../../components/Icons/TabBar/ProfileTabIcon'
+import { LikeIcon } from '../../components/Icons/LikeIcon'
 
 export type BottomTabParamsList = {
   [Routes.MainTab]: undefined
@@ -25,7 +26,7 @@ const HomeTabs: React.FC = () => {
         lazy: false,
         headerShown: false,
         tabBarHideOnKeyboard: IS_IOS ? false : true,
-        tabBarActiveTintColor: theme.colors.blue_6,
+        tabBarActiveTintColor: theme.colors.cyan_6,
         tabBarInactiveTintColor: theme.colors.gray_7,
         tabBarAllowFontScaling: false,
         tabBarStyle: {
@@ -48,7 +49,7 @@ const HomeTabs: React.FC = () => {
       <TabNavigator.Screen
         options={{
           tabBarIcon: ({ focused }) => (
-            <MainTabIcon color={focused ? theme.colors.blue_6 : theme.colors.gray_7} />
+            <MainTabIcon color={focused ? theme.colors.cyan_6 : theme.colors.gray_7} />
           ),
           tabBarLabel: 'Главная',
         }}
@@ -58,7 +59,7 @@ const HomeTabs: React.FC = () => {
       <TabNavigator.Screen
         options={{
           tabBarIcon: ({ focused }) => (
-            <EmployeeTabIcon color={focused ? theme.colors.blue_6 : theme.colors.gray_7} />
+            <LikeIcon color={focused ? theme.colors.cyan_6 : theme.colors.gray_7} />
           ),
           tabBarLabel: 'Избранное',
         }}
@@ -69,7 +70,7 @@ const HomeTabs: React.FC = () => {
         options={{
           lazy: false,
           tabBarIcon: ({ focused }) => (
-            <ProfileTabIcon color={focused ? theme.colors.blue_6 : theme.colors.gray_7} />
+            <ProfileTabIcon color={focused ? theme.colors.cyan_6 : theme.colors.gray_7} />
           ),
           tabBarLabel: 'Профиль',
         }}

@@ -17,7 +17,7 @@ const createStyles = (theme: Theme) => {
     regular: { fontFamily: 'Inter-Regular' },
     medium: { fontFamily: 'Inter-Medium' },
     center: { textAlign: 'center' },
-    linkTextStyle: { textDecorationLine: 'underline', color: theme.colors.blue_6 },
+    linkTextStyle: { textDecorationLine: 'underline', color: theme.colors.cyan_6 },
   })
 
   return styles

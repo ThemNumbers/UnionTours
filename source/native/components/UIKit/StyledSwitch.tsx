@@ -42,9 +42,9 @@ interface Props {
 const StyledSwitch: React.FC<Props> = ({ isActive, onPress }) => {
   const { theme, styles } = useThemeStyles(createStyles)
   const anim = useSharedValue(isActive ? 1 : 0)
-  const ACTIVE_BACKGROUND_COLOR = theme.colors.blue_6
+  const ACTIVE_BACKGROUND_COLOR = theme.colors.cyan_6
   const IN_ACTIVE_BACKGROUND_COLOR = theme.colors.gray_3
-  const ACTIVE_BORDER_COLOR = theme.colors.blue_6
+  const ACTIVE_BORDER_COLOR = theme.colors.cyan_6
   const IN_ACTIVE_BORDER_COLOR = theme.colors.gray_5
 
   useEffect(() => {

@@ -1,11 +1,10 @@
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { StyleProp, ViewStyle } from 'react-native'
-import { Pending } from '../../../framework/redux/interfaces/News'
+import { Pending } from '../../../framework/mobx/interfaces/Tours'
 import { useTheme } from '../../theme'
 import { EmptyIcon } from '../Icons/EmptyIcon'
 import { SadSmileIcon } from '../Icons/SadSmileIcon'
-import { WarningIcon } from '../Icons/WarningIcon'
 import { StyledCircleIndicator } from '../UIKit/StyledCircleIndicator'
 import { PendingPreview } from './modules/PendingPreview'
 import { ScrollViewWrapper } from './modules/ScrollViewWrapper'
@@ -31,19 +30,12 @@ const PendingWrapper: React.FC<Props> = ({
   const navigation = useNavigation()
   const withRefresh = disableRefresh
     ? false
-    : [Pending.BLOCKED, Pending.FAILED, Pending.EMPTY].some((p) => p === pending)
+    : [Pending.FAILED, Pending.EMPTY].some((p) => p === pending)
 
   return (
     <ScrollViewWrapper withRefresh={withRefresh} onRefresh={onRefresh} refreshing={refreshing}>
       {pending === Pending.DONE ? (
         children
-      ) : pending === Pending.BLOCKED ? (
-        <PendingPreview
-          icon={<WarningIcon color={theme.colors.gray_6} />}
-          description={'Недостаточно прав для работы в системе'}
-          buttonTitle={'Ок'}
-          onPress={() => navigation.goBack()}
-        />
       ) : pending === Pending.FAILED ? (
         <PendingPreview
           icon={<SadSmileIcon color={theme.colors.gray_6} />}

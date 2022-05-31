@@ -50,7 +50,7 @@ const createStyles = (theme: Theme) => {
       justifyContent: 'center',
       borderWidth: 1,
       borderColor: theme.colors.gray_1,
-      backgroundColor: theme.colors.blue_6,
+      backgroundColor: theme.colors.cyan_6,
     },
     contentShadowWrapper: {
       flex: 1,

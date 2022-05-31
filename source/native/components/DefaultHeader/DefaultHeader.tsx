@@ -42,7 +42,7 @@ const createStyles = (theme: Theme) => {
       position: 'absolute',
       top: 0,
       right: 0,
-      backgroundColor: theme.colors.blue_6,
+      backgroundColor: theme.colors.cyan_6,
     },
   })
 

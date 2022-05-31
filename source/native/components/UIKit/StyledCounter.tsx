@@ -55,8 +55,8 @@ interface Props {
 const StyledCounter: React.FC<Props> = ({ label, containerStyle, isRequired, value, onChange }) => {
   const { theme, styles } = useThemeStyles(createStyles)
   const middleStyle = {
-    borderColor: value > 0 ? theme.colors.blue_6 : theme.colors.gray_4,
-    backgroundColor: value > 0 ? theme.colors.blue_6 : theme.colors.gray_2,
+    borderColor: value > 0 ? theme.colors.cyan_6 : theme.colors.gray_4,
+    backgroundColor: value > 0 ? theme.colors.cyan_6 : theme.colors.gray_2,
   }
   const minusColor = value === 0 ? theme.colors.gray_5 : theme.colors.gray_8
   const plusColor = value === 99 ? theme.colors.gray_5 : theme.colors.gray_8

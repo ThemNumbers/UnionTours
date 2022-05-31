@@ -6,7 +6,7 @@ const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({
     dot: { width: 4, height: 4, borderRadius: 2 },
     whiteDot: { backgroundColor: theme.colors.gray_1 },
-    blueDot: { backgroundColor: theme.colors.blue_6 },
+    blueDot: { backgroundColor: theme.colors.cyan_6 },
   })
 
   return styles

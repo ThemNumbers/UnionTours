@@ -48,7 +48,7 @@ const StyledCircleIndicator: React.FC<Props> = ({ size, strokeColor, style }) =>
         x={radius + strokeWidth / 2}
         y={radius + strokeWidth / 2}
         opacity={0.2}
-        stroke={strokeColor || theme.colors.blue_6}
+        stroke={strokeColor || theme.colors.cyan_6}
         strokeWidth={strokeWidth}
       />
       <AnimatedCircle
@@ -58,7 +58,7 @@ const StyledCircleIndicator: React.FC<Props> = ({ size, strokeColor, style }) =>
         strokeDasharray={`${radius * 2 * Math.PI} ${radius * 2 * Math.PI}`}
         x={radius + strokeWidth / 2}
         y={radius + strokeWidth / 2}
-        stroke={strokeColor || theme.colors.blue_6}
+        stroke={strokeColor || theme.colors.cyan_6}
         strokeWidth={strokeWidth}
       />
     </AnimatedSVG>

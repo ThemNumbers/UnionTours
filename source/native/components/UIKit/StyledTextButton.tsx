@@ -7,7 +7,7 @@ import { StyledText } from './StyledText'
 const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({
     container: { flex: 1, padding: 13, alignItems: 'center', justifyContent: 'center' },
-    title: { color: theme.colors.blue_6 },
+    title: { color: theme.colors.cyan_6 },
   })
 
   return styles

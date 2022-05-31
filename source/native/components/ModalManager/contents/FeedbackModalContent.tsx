@@ -178,7 +178,7 @@ const FeedbackModalContent: React.FC<Props> = ({
           {withAttachments && countAttachments && selectedAttachments.length < countAttachments ? (
             <ImageAttachmentButton
               activeBtnBgColor={theme.colors.gray_2}
-              activeBtnTextColor={theme.colors.blue_6}
+              activeBtnTextColor={theme.colors.cyan_6}
               withoutModal
               onSelectImage={(selectedImage) => onSelectAttachment(selectedImage)}
               selectedImage={undefined}

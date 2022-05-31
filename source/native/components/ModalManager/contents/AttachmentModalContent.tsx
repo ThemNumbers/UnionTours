@@ -77,7 +77,7 @@ const AttachmentModalContent: React.FC<Props> = ({ title, hideModal, onSelectTyp
           hideModal()
         }}
       >
-        <GalleryIcon color={theme.colors.blue_6} />
+        <GalleryIcon color={theme.colors.cyan_6} />
         <StyledText size={'m'} family={'semibold'} style={styles.optionText}>
           Выбрать изображение
         </StyledText>
@@ -92,7 +92,7 @@ const AttachmentModalContent: React.FC<Props> = ({ title, hideModal, onSelectTyp
           hideModal()
         }}
       >
-        <CameraIcon color={theme.colors.blue_6} />
+        <CameraIcon color={theme.colors.cyan_6} />
         <StyledText size={'m'} family={'semibold'} style={styles.optionText}>
           Сделать фото
         </StyledText>

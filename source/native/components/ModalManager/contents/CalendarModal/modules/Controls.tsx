@@ -18,7 +18,7 @@ const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({
     container: { flexDirection: 'row', height: 40, marginHorizontal: 16, marginTop: 16 },
     currentDateContainer: { flex: 1, alignItems: 'center', flexDirection: 'row' },
-    date: { color: theme.colors.blue_6, marginLeft: 8 },
+    date: { color: theme.colors.cyan_6, marginLeft: 8 },
     controlContainer: {
       width: 40,
       height: 40,

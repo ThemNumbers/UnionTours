@@ -19,10 +19,10 @@ const createStyles = (theme: Theme) => {
       borderWidth: 2,
       alignItems: 'center',
       justifyContent: 'center',
-      borderColor: theme.colors.blue_6,
+      borderColor: theme.colors.cyan_6,
     },
     innerCircle: {
-      backgroundColor: theme.colors.blue_6,
+      backgroundColor: theme.colors.cyan_6,
       borderRadius: 22,
     },
   })

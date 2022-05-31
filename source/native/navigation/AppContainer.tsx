@@ -8,6 +8,8 @@ import { FCMService } from '../../framework/services/FCMService'
 import { navigateToDeeplink, navigationRef } from './RootNavigation'
 import { useFiltersStore } from '../../framework/mobx/stores'
 import { Routes } from './routes'
+import { observer } from 'mobx-react'
+import { sleep } from '../utils/sleep'
 
 export const baseScreenOptions: StackNavigationOptions = {
   headerShown: false,
@@ -16,7 +18,7 @@ export const baseScreenOptions: StackNavigationOptions = {
   detachPreviousScreen: false,
 }
 
-export const AppContainer: React.FC = () => {
+export const AppContainer: React.FC = observer(() => {
   const { filtersIsInitialized } = useFiltersStore()
 
   // TODO: Uncomment later
@@ -28,12 +30,11 @@ export const AppContainer: React.FC = () => {
 
   useEffect(() => {
     if (filtersIsInitialized !== undefined) {
-      RNBootSplash.getVisibilityStatus().then((splashVisibleStatus) => {
-        splashVisibleStatus === 'visible' && RNBootSplash.hide({ fade: true })
+      sleep(200).then(() => {
+        RNBootSplash.getVisibilityStatus().then((splashVisibleStatus) => {
+          splashVisibleStatus === 'visible' && RNBootSplash.hide({ fade: true })
+        })
       })
-      if (filtersIsInitialized === false) {
-        navigateToDeeplink(Routes.SelectCategoriesScreen)
-      }
     }
   }, [filtersIsInitialized])
 
@@ -44,9 +45,9 @@ export const AppContainer: React.FC = () => {
           <HomeStack />
           <FCMService />
         </>
-      ) : (
+      ) : filtersIsInitialized !== undefined ? (
         <CategoriesStack />
-      )}
+      ) : null}
     </NavigationContainer>
   )
-}
+})

@@ -38,9 +38,15 @@ class ToursStore {
   }
 
   public getToursList = () => {
-    // callApi<Array<Tour>>({ endpoint: '/tours' }).then((res) => {
-    //   this.tours = res.data
-    // })
+    //this.root.filters.selectedFilters
+    //this.root.filters.filters.map(f => )
+    this.toursPending = Pending.LOADING
+    callApi<any>({ endpoint: '/catalog?language=ru&pageSize=50&query[category]=4' })
+      .then((res) => {
+        this.tours = res.data.items
+        this.toursPending = Pending.DONE
+      })
+      .catch((e) => console.log(e))
   }
 
   private saveFavoriteList = () => {

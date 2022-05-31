@@ -26,7 +26,7 @@ const createStyles = (theme: Theme) => {
       justifyContent: 'center',
       backgroundColor: theme.colors.gray_1,
     },
-    btnText: { color: theme.colors.blue_6 },
+    btnText: { color: theme.colors.cyan_6 },
   })
 
   return styles

@@ -14,7 +14,7 @@ const createStyles = (theme: Theme) => {
       paddingHorizontal: 8,
       backgroundColor: 'transparent',
     },
-    activeContainer: { backgroundColor: theme.colors.blue_6 },
+    activeContainer: { backgroundColor: theme.colors.cyan_6 },
     text: { color: theme.colors.gray_9 },
     activeText: { color: theme.colors.gray_1 },
   })

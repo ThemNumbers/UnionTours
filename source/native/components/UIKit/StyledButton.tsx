@@ -56,7 +56,7 @@ const StyledButton: React.FC<Props> = ({
   const { theme } = useTheme()
   const animLoading = useSharedValue(0)
   const animDisabled = useSharedValue(disabled ? 1 : 0)
-  const bgColors = [activeBgColor || theme.colors.blue_6, inActiveBgColor || theme.colors.gray_4]
+  const bgColors = [activeBgColor || theme.colors.cyan_6, inActiveBgColor || theme.colors.gray_4]
   const currentTextColor = disabled
     ? inActiveTextColor || theme.colors.gray_6
     : activeTextColor || theme.colors.gray_1

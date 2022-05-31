@@ -8,7 +8,7 @@ import { HeaderWithAction } from '../../components/HeaderWithAction'
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  headerContainer: { marginTop: 32 },
+  headerContainer: { marginTop: 16 },
 })
 
 interface Props {

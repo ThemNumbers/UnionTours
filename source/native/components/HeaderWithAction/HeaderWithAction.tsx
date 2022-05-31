@@ -21,7 +21,7 @@ const createStyles = (theme: Theme) => {
       position: 'absolute',
       top: -1,
       right: -1,
-      backgroundColor: theme.colors.blue_6,
+      backgroundColor: theme.colors.cyan_6,
     },
   })
 
@@ -65,7 +65,7 @@ const HeaderWithAction: React.FC<Props> = ({
                 <StyledText
                   size={'m'}
                   family={'medium'}
-                  style={{ color: rightAction.color || theme.colors.blue_6 }}
+                  style={{ color: rightAction.color || theme.colors.cyan_6 }}
                 >
                   Все
                 </StyledText>

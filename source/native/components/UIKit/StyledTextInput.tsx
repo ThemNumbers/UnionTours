@@ -75,7 +75,7 @@ const StyledTextInput = forwardRef<IStyledTextInputRef, IStyledTextInput>(
     ref
   ) => {
     const [isFocused, setIsFocused] = useState<boolean>(false)
-    let inputRef = useRef<TextInput | null>(null)
+    const inputRef = useRef<TextInput | null>(null)
     const { theme, styles } = useThemeStyles(createStyles)
     const { keyboardOpened } = useKeyboard()
 
@@ -105,7 +105,7 @@ const StyledTextInput = forwardRef<IStyledTextInputRef, IStyledTextInput>(
         <View
           style={[
             styles.inputContainer,
-            { borderColor: isFocused ? theme.colors.blue_6 : theme.colors.gray_3 },
+            { borderColor: isFocused ? theme.colors.cyan_6 : theme.colors.gray_3 },
             inputContainerStyle,
           ]}
         >

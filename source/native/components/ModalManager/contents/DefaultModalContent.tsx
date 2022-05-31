@@ -24,7 +24,7 @@ const createStyles = (theme: Theme) => {
     horizontalDivider: { width: '100%', height: 1, backgroundColor: theme.colors.gray_5 },
     verticalDivider: { width: 1, height: '100%', backgroundColor: theme.colors.gray_5 },
     buttonContainer: { alignItems: 'center', justifyContent: 'center', height: 44, flex: 1 },
-    btnText: { color: theme.colors.blue_6 },
+    btnText: { color: theme.colors.cyan_6 },
   })
 
   return styles

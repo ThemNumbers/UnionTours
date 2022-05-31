@@ -14,7 +14,7 @@ const createStyles = (theme: Theme) => {
       borderRadius: 48,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: theme.colors.blue_6,
+      backgroundColor: theme.colors.cyan_6,
     },
   })
 

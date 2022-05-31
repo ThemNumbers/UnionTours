@@ -35,11 +35,11 @@ const TabItem: React.FC<Props> = React.memo(
     }, [isActive, anim])
 
     const animatedTextStyle = useAnimatedStyle(() => ({
-      color: interpolateColor(anim.value, [0, 1], [theme.colors.gray_9, theme.colors.blue_6]),
+      color: interpolateColor(anim.value, [0, 1], [theme.colors.gray_9, theme.colors.cyan_6]),
     }))
 
     const animatedPlateStyle = useAnimatedStyle(() => ({
-      backgroundColor: interpolateColor(anim.value, [0, 1], ['transparent', theme.colors.blue_6]),
+      backgroundColor: interpolateColor(anim.value, [0, 1], ['transparent', theme.colors.cyan_6]),
       width: `${interpolate(anim.value, [0, 1], [0, 100])}%`,
     }))
 

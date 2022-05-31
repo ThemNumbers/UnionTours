@@ -27,6 +27,9 @@ class FiltersStore {
 
   public updateFiltersList = (nextFilters: Array<FilterGroup>) => {
     this.filters = nextFilters
+    if (!this.filtersIsInitialized) {
+      this.filtersIsInitialized = true
+    }
     this.saveFiltersList()
   }
 

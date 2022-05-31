@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Dimensions, StyleSheet, useWindowDimensions, View } from 'react-native'
 import { Tour } from '../../../../framework/mobx/interfaces/Tours'
 import { FilledStarIcon } from '../../../components/Icons/FilledStarIcon'
 import { LikeIcon } from '../../../components/Icons/LikeIcon'
@@ -21,15 +21,14 @@ const createStyles = (theme: Theme) => {
     },
     shadowStyle: {
       borderRadius: 16,
-      height: 200,
-      padding: 16,
+      height: 400,
       flexDirection: 'row',
       flex: 1,
       backgroundColor: theme.colors.gray_1,
     },
     imageWrapper: {
-      width: 117,
-      height: '100%',
+      width: '100%',
+      height: 300,
       overflow: 'hidden',
       borderRadius: 16,
       alignItems: 'center',
@@ -38,7 +37,7 @@ const createStyles = (theme: Theme) => {
     },
     contentContainer: { flex: 1, marginLeft: 16 },
     title: { color: theme.colors.gray_9, flex: 1 },
-    image: { width: 117, height: 168 },
+    image: { width: Dimensions.get('window').width, height: 300 },
     desc: { color: theme.colors.gray_7 },
   })
 
@@ -52,6 +51,9 @@ interface Props {
 
 const TourItem: React.FC<Props> = ({ item, isLast, onItemPress }) => {
   const { styles, theme } = useThemeStyles(createStyles)
+  const { width } = useWindowDimensions()
+  const ITEM_WIDTH = width - 32
+  const ITEM_HEIGHT = width * 0.7725
 
   const onPress = () => {
     triggerHaptic()
@@ -66,10 +68,11 @@ const TourItem: React.FC<Props> = ({ item, isLast, onItemPress }) => {
       <ShadowView type={'hard'} style={styles.shadowStyle}>
         <View style={styles.imageWrapper}>
           <LoadingImage
-            uri={
-              'https://travelata-a.akamaihd.net/thumbs/320x240/upload/2019_36/content_hotel_5d6f9338a4a7c7.45020788.jpg'
-            }
-            style={styles.image}
+            uri={item.image_explore_preview[0].image}
+            style={{
+              width: ITEM_WIDTH,
+              height: ITEM_HEIGHT,
+            }}
             resizeMode={'cover'}
           />
         </View>
@@ -99,25 +102,18 @@ const TourItem: React.FC<Props> = ({ item, isLast, onItemPress }) => {
               </StyledText>
             </View>
           </View>
-          <View style={{ marginTop: 4, flexDirection: 'row', alignItems: 'center' }}>
-            <FilledStarIcon width={16} height={16} color={theme.colors.gold_6} />
-            <FilledStarIcon width={16} height={16} color={theme.colors.gold_6} />
-            <OutlinedStarIcon width={16} height={16} color={theme.colors.gold_6} />
-            <OutlinedStarIcon width={16} height={16} color={theme.colors.gold_6} />
-            <OutlinedStarIcon width={16} height={16} color={theme.colors.gold_6} />
-          </View>
           <StyledText size={'xs'} family={'regular'} numberOfLines={3} style={styles.desc}>
-            Прекрасное место для путешествий и отдыха семьей Очень классный отдых
+            {item.city}
           </StyledText>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <LikeIcon color={theme.colors.blue_6} />
+            <LikeIcon color={theme.colors.cyan_6} />
             <StyledText
               size={'xs'}
               family={'medium'}
               numberOfLines={1}
-              style={{ color: theme.colors.blue_6, marginLeft: 12 }}
+              style={{ color: theme.colors.cyan_6, marginLeft: 12 }}
             >
-              Большой Сочи: Адлер
+              от {item.price}
             </StyledText>
           </View>
         </View>

@@ -49,8 +49,8 @@ const StyledCheckBox: React.FC<Props> = ({ checkBoxState }) => {
       style={[
         styles.container,
         {
-          backgroundColor: checkBoxState ? theme.colors.blue_6 : theme.colors.gray_3,
-          borderColor: checkBoxState ? theme.colors.blue_6 : theme.colors.gray_5,
+          backgroundColor: checkBoxState ? theme.colors.cyan_6 : theme.colors.gray_3,
+          borderColor: checkBoxState ? theme.colors.cyan_6 : theme.colors.gray_5,
         },
         containerStyle,
       ]}

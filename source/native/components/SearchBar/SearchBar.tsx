@@ -31,7 +31,7 @@ const createStyles = (theme: Theme) => {
       fontFamily: 'Inter-SemiBold',
       fontSize: 15,
       lineHeight: 24,
-      color: theme.colors.blue_6,
+      color: theme.colors.cyan_6,
     },
   })
 

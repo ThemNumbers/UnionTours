@@ -23,7 +23,7 @@ const ScalingDot: React.FC<Props> = ({ scrollX, inputRangeOffset, index }) => {
   const { width } = useWindowDimensions()
   const ACTIVE_DOT_SCALE = 1.5
   const IN_ACTIVE_DOT_COLOR = theme.colors.gray_5
-  const ACTIVE_DOT_COLOR = theme.colors.blue_6
+  const ACTIVE_DOT_COLOR = theme.colors.cyan_6
 
   const inputRange = [
     (index - 1) * (width - inputRangeOffset),
