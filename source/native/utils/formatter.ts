@@ -87,11 +87,11 @@ const formatNDS = (input: string) => {
   return input.includes('НДС') ? input : `${input} %`
 }
 
-const formatSum = (sum?: number) => {
+const formatSum = (sum?: number, hidePostfix?: boolean) => {
   return sum !== undefined
     ? `${String(sum)
         .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-        .replace('.', ',')} ₽`
+        .replace('.', ',')}${hidePostfix ? '' : ' ₽'}`
     : undefined
 }
 

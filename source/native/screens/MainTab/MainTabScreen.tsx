@@ -20,11 +20,12 @@ import { PendingWrapper } from '../../components/PendingWrapper'
 const createStyles = (theme: Theme) => {
   const styles = StyleSheet.create({
     container: { flex: 1 },
-    headerContainer: { marginTop: 16 },
-    listContainer: { paddingTop: 16, flex: 1 },
+    headerContainer: { marginTop: 16, paddingBottom: 16 },
+    listContainer: { flex: 1 },
     footerIndicator: { marginVertical: 24, alignSelf: 'center' },
     listStyle: { flexGrow: 1, justifyContent: 'center', alignItems: 'center' },
     emptyListContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    separator: { flex: 1, height: 1, backgroundColor: theme.colors.gray_3, marginVertical: 16 },
   })
 
   return styles
@@ -34,13 +35,16 @@ interface Props {
   navigation: StackProp<UnionMainTabStackParamsList, Routes.MainTabScreen>
 }
 
-const MainTabScreen: React.FC<Props> = observer(() => {
-  const { theme, changeBarStyle, styles } = useThemeStyles(createStyles)
-  const { getToursList, tours, toursPending } = useToursStore()
-  const { selectedFilters } = useFiltersStore()
+const MainTabScreen: React.FC<Props> = observer(({ navigation }) => {
+  const { theme, styles } = useThemeStyles(createStyles)
+  const { getToursList, makeFavorite, tours, favoriteTours, toursPending } = useToursStore()
+  const { filters } = useFiltersStore()
   const isRequested = useRef<boolean>(false)
   const nextPageUri = false
   const { canMakeRequest } = useConnectionStatus()
+  const filterIsActive = filters.some(
+    (fc) => fc.filters.some((f) => f.isSelected) || fc.startSliderValue || fc.endSliderValue
+  )
 
   useEffect(() => {
     if (canMakeRequest) {
@@ -53,21 +57,29 @@ const MainTabScreen: React.FC<Props> = observer(() => {
   }
 
   const renderFooter = () =>
-    nextPageUri ? <StyledCircleIndicator size={32} style={styles.footerIndicator} /> : null
+    nextPageUri ? (
+      <StyledCircleIndicator size={32} style={styles.footerIndicator} />
+    ) : (
+      <View style={{ height: 16 }} />
+    )
 
-  const onCardPress = () => {
-    console.log('on card press')
+  const onCardPress = (item: Tour) => {
+    navigation.navigate(Routes.AboutTourScreen, { tour: item })
+  }
+
+  const onFilterPress = () => {
+    navigation.navigate(Routes.FiltersListScreen, { onSave: onRefresh })
   }
 
   const renderItem = ({ item }: { item: Tour; index: number }) => (
-    <TourItem item={item} isLast={false} onItemPress={onCardPress} key={item.id} />
+    <TourItem
+      item={item}
+      isFavorite={favoriteTours.find((t) => t.id === item.id) ? true : false}
+      onCardPress={onCardPress}
+      onMakeFavorite={makeFavorite}
+      key={item.id}
+    />
   )
-
-  const onFilterPress = () => {
-    console.log('fil pres')
-  }
-
-  const filterIsActive = false
 
   const renderEmpty = () => (
     <PendingPreview
@@ -77,6 +89,9 @@ const MainTabScreen: React.FC<Props> = observer(() => {
       containerStyle={styles.emptyListContainer}
     />
   )
+
+  const renderSeparator = () => <View style={styles.separator} />
+  const renderHeader = () => <View style={{ height: 8 }} />
 
   return (
     <View style={styles.container}>
@@ -101,8 +116,10 @@ const MainTabScreen: React.FC<Props> = observer(() => {
           ListEmptyComponent={renderEmpty}
           contentContainerStyle={tours.length ? undefined : styles.listStyle}
           ListFooterComponent={renderFooter}
+          ListHeaderComponent={renderHeader}
           refreshing={false}
           keyExtractor={keyExtractor}
+          ItemSeparatorComponent={renderSeparator}
           showsVerticalScrollIndicator={false}
           onRefresh={onRefresh}
           keyboardShouldPersistTaps={'handled'}

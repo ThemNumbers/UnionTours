@@ -11,6 +11,7 @@ import Modal from 'react-native-modal'
 import { sleep } from '../../utils/sleep'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useModalsStore } from '../../../framework/mobx/stores'
+import { observer } from 'mobx-react'
 
 const styles = StyleSheet.create({
   blurWrapper: { width: '100%', height: '100%', backgroundColor: 'transparent' },
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
   swipeModalStyle: { justifyContent: 'flex-end', margin: 0 },
 })
 
-const ModalManager: React.FC = () => {
+const ModalManager: React.FC = observer(() => {
   const { modal, setModal } = useModalsStore()
   const [isVisible, setIsVisible] = React.useState(false)
   const { width, height } = useWindowDimensions()
@@ -89,6 +90,6 @@ const ModalManager: React.FC = () => {
       {modal ? modal.renderContent(hideModal) : <></>}
     </Modal>
   )
-}
+})
 
 export { ModalManager }

@@ -21,19 +21,17 @@ const createStyles = (theme: Theme) => {
       width: '100%',
       minHeight: 48,
       borderRadius: 8,
-      paddingVertical: 12,
+      padding: 16,
       alignItems: 'center',
-      paddingHorizontal: 16,
       flexDirection: 'row',
-      backgroundColor: theme.colors.gray_1,
     },
     title: { color: theme.colors.gray_9 },
     textContainer: { flex: 1, marginLeft: 8 },
-    leftBtnText: { color: theme.colors.cyan_6 },
-    rightBtnText: { color: theme.colors.cyan_6, marginLeft: 24 },
+    leftBtnText: { color: theme.colors.blue_6 },
+    rightBtnText: { color: theme.colors.blue_6, marginLeft: 24 },
     iconContainer: {
-      width: 24,
-      height: 24,
+      width: 20,
+      height: 20,
       alignSelf: 'flex-start',
       alignItems: 'center',
       justifyContent: 'center',
@@ -43,6 +41,8 @@ const createStyles = (theme: Theme) => {
       marginTop: 10,
       alignItems: 'center',
     },
+    bodyText: { color: theme.colors.gray_8 },
+    space: { marginTop: 4 },
   })
 
   return styles
@@ -57,6 +57,15 @@ interface Props {
 
 const AlertItem: React.FC<Props> = ({ alert, containerStyle, onPress, onHide }) => {
   const { theme, styles } = useThemeStyles(createStyles)
+  const bgColor = alert.fillBackground
+    ? alert.type === 'info'
+      ? theme.colors.blue_1
+      : alert.type === 'success'
+      ? theme.colors.green_1
+      : alert.type === 'warning'
+      ? theme.colors.yellow_1
+      : theme.colors.red_1
+    : theme.colors.gray_1
 
   return (
     <TouchableBounce
@@ -64,7 +73,7 @@ const AlertItem: React.FC<Props> = ({ alert, containerStyle, onPress, onHide }) 
       onPress={onPress}
       style={[styles.container, containerStyle]}
     >
-      <ShadowView type={'light'} style={styles.shadowWrapper}>
+      <ShadowView type={'light'} style={[styles.shadowWrapper, { backgroundColor: bgColor }]}>
         <View style={styles.iconContainer}>
           {alert.type === 'info' ? (
             <InfoIcon size={16} />
@@ -78,19 +87,16 @@ const AlertItem: React.FC<Props> = ({ alert, containerStyle, onPress, onHide }) 
         </View>
         <View style={styles.textContainer}>
           {alert.title ? (
-            <StyledText size={'m'} family={'semibold'} style={styles.title}>
+            <StyledText size={'s'} family={'bold'} style={styles.title}>
               {alert.title}
             </StyledText>
           ) : null}
           {alert.body ? (
             <StyledText
-              size={'xs'}
-              family={'semibold'}
+              size={'s'}
+              family={'regular'}
               numberOfLines={4}
-              style={{
-                marginTop: alert.title ? 4 : 0,
-                color: alert.title ? theme.colors.gray_8 : theme.colors.gray_9,
-              }}
+              style={[styles.bodyText, alert.title ? styles.space : undefined]}
             >
               {alert.body}
             </StyledText>

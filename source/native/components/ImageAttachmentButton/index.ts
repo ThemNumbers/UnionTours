@@ -1,1 +1,0 @@
-export { ImageAttachmentButton } from './ImageAttachmentButton'

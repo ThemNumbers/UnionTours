@@ -11,40 +11,43 @@ import { Tour } from '../../../framework/mobx/interfaces/Tours'
 import { PendingPreview } from '../../components/PendingWrapper/modules/PendingPreview'
 import { OutlinedStarIcon } from '../../components/Icons/OutlinedStarIcon'
 import { keyExtractor } from '../../utils/constants'
-import { useTheme } from '../../theme'
+import { Theme, useTheme, useThemeStyles } from '../../theme'
+import { useFiltersStore, useToursStore } from '../../../framework/mobx/stores'
 
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  headerContainer: { marginTop: 16 },
-  listContainer: { paddingTop: 16, flex: 1 },
-  footerIndicator: { marginVertical: 24, alignSelf: 'center' },
-  listStyle: { flexGrow: 1, justifyContent: 'center', alignItems: 'center' },
-  emptyListContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  footerSpace: { height: 16 },
-})
+const createStyles = (theme: Theme) => {
+  const styles = StyleSheet.create({
+    container: { flex: 1 },
+    headerContainer: { marginTop: 16, paddingBottom: 16 },
+    listContainer: { flex: 1 },
+    listStyle: { flexGrow: 1, justifyContent: 'center', alignItems: 'center' },
+    emptyListContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    separator: { flex: 1, height: 1, backgroundColor: theme.colors.gray_3, marginVertical: 16 },
+  })
+
+  return styles
+}
 
 interface Props {
   navigation: StackProp<UnionFavoriteTabStackParamsList, Routes.FavoriteTabScreen>
 }
 
-const FavoriteTabScreen: React.FC<Props> = observer(() => {
-  const { theme } = useTheme()
-
-  const onCardPress = () => {
-    console.log('on card press')
-  }
-
-  const renderItem = ({ item }: { item: Tour; index: number }) => (
-    <TourItem item={item} isLast={false} onItemPress={onCardPress} key={item.id} />
+const FavoriteTabScreen: React.FC<Props> = observer(({ navigation }) => {
+  const { theme, styles } = useThemeStyles(createStyles)
+  const { makeFavorite, favoriteTours } = useToursStore()
+  const { filters } = useFiltersStore()
+  const filterIsActive = filters.some(
+    (fc) => fc.filters.some((f) => f.isSelected) || fc.startSliderValue || fc.endSliderValue
   )
 
-  const onFilterPress = () => {
-    console.log('fil pres')
+  const onCardPress = (item: Tour) => {
+    navigation.navigate(Routes.AboutTourScreen, { tour: item })
   }
 
-  const filterIsActive = false
+  const onFilterPress = () => {
+    navigation.navigate(Routes.FiltersListScreen, { onSave: () => null })
+  }
 
-  const data: Array<any> = []
+  const renderSeparator = () => <View style={styles.separator} />
 
   const renderEmpty = () => (
     <PendingPreview
@@ -54,6 +57,19 @@ const FavoriteTabScreen: React.FC<Props> = observer(() => {
       containerStyle={styles.emptyListContainer}
     />
   )
+
+  const renderItem = ({ item }: { item: Tour; index: number }) => (
+    <TourItem
+      item={item}
+      isFavorite={favoriteTours.find((t) => t.id === item.id) ? true : false}
+      onCardPress={onCardPress}
+      onMakeFavorite={makeFavorite}
+      key={item.id}
+    />
+  )
+
+  const renderHeader = () => <View style={{ height: 8 }} />
+  const renderFooter = () => <View style={{ height: 16 }} />
 
   return (
     <View style={styles.container}>
@@ -66,12 +82,16 @@ const FavoriteTabScreen: React.FC<Props> = observer(() => {
           showIndicator: filterIsActive,
         }}
       />
+
       <FlatList
-        data={data}
+        data={favoriteTours}
         style={styles.listContainer}
+        ListHeaderComponent={renderHeader}
+        ListFooterComponent={renderFooter}
         ListEmptyComponent={renderEmpty}
-        contentContainerStyle={data.length ? undefined : styles.listStyle}
+        contentContainerStyle={favoriteTours.length ? undefined : styles.listStyle}
         keyExtractor={keyExtractor}
+        ItemSeparatorComponent={renderSeparator}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps={'handled'}
         //onEndReached={() => fetchNewsPage(selectedTags)}

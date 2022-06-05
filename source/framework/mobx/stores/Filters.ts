@@ -1,23 +1,21 @@
 import { observable, makeObservable, action, configure } from 'mobx'
 import { RootStore } from '.'
 import { getItem, setItem, StorageKeys } from '../../services/StorageService'
-import { FilterGroup, FilterItem } from '../interfaces/Filters'
+import { FilterGroup } from '../interfaces/Filters'
 import { initialFilters } from '../mocks/Filters'
 
 class FiltersStore {
   private root: RootStore
   public filtersIsInitialized: boolean | undefined = undefined
   public filters: Array<FilterGroup> = []
-  public selectedFilters: Array<FilterItem> = []
 
   constructor(root: RootStore) {
     this.root = root
     makeObservable(this, {
       filters: observable,
       filtersIsInitialized: observable,
-      selectedFilters: observable,
       updateFiltersList: action,
-      selectFilter: action,
+      dropFiltersList: action,
     })
     configure({
       enforceActions: 'never',
@@ -30,19 +28,16 @@ class FiltersStore {
     if (!this.filtersIsInitialized) {
       this.filtersIsInitialized = true
     }
-    this.saveFiltersList()
+    setItem(StorageKeys.FILTERS, this.filters)
   }
 
-  public selectFilter = (item: FilterItem) => {
-    const filterIsSelected = this.selectedFilters.find((f) => f.key === item.key)
-    if (filterIsSelected) {
-      this.selectedFilters = this.selectedFilters.filter((f) => f.key !== item.key)
-    } else {
-      this.selectedFilters = [...this.selectedFilters, item]
-    }
-  }
-
-  private saveFiltersList = () => {
+  public dropFiltersList = () => {
+    this.filters = this.filters.map((fc) => ({
+      ...fc,
+      startSliderValue: undefined,
+      endSliderValue: undefined,
+      filters: fc.filters.map((f) => ({ ...f, isSelected: false })),
+    }))
     setItem(StorageKeys.FILTERS, this.filters)
   }
 
@@ -50,6 +45,7 @@ class FiltersStore {
     getItem<FilterGroup[]>(StorageKeys.FILTERS).then((nextFilters) => {
       if (nextFilters) {
         this.filters = nextFilters
+        this.dropFiltersList()
         this.filtersIsInitialized = true
       } else {
         this.filters = initialFilters

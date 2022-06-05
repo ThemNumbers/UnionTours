@@ -115,7 +115,9 @@ const DefaultHeader: React.FC<Props> = ({
             </TouchableOpacity>
           ))}
         </View>
-      ) : null}
+      ) : (
+        <View style={{ width: 24, height: 24, marginHorizontal: 16 }} />
+      )}
     </View>
   )
 }

@@ -109,7 +109,7 @@ const StyledSection: React.FC<StyledSectionProps> = ({
         <View
           style={[
             styles.sectionIconContainer,
-            { backgroundColor: isFailed ? theme.colors.red_4 : theme.colors.geekblue_4 },
+            { backgroundColor: isFailed ? theme.colors.red_4 : theme.colors.cyan_4 },
           ]}
         >
           {isLoading ? (

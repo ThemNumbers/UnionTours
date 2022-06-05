@@ -1,15 +1,14 @@
 import { observable, makeObservable, action, configure } from 'mobx'
 import { RootStore } from '.'
-import { callApi } from '../../services/ApiService'
+import { callApi, ResponseObject } from '../../services/ApiService'
 import { getItem, setItem, StorageKeys } from '../../services/StorageService'
-import { Pending, Tour } from '../interfaces/Tours'
+import { FullApiTourResp, Pending, Tour } from '../interfaces/Tours'
 
 class ToursStore {
   private root: RootStore
   public tours: Array<Tour> = []
   public favoriteTours: Array<Tour> = []
   public toursPending: Pending = Pending.CLEAR
-  public favoritesPending: Pending = Pending.CLEAR
 
   constructor(root: RootStore) {
     this.root = root
@@ -17,9 +16,9 @@ class ToursStore {
       tours: observable,
       favoriteTours: observable,
       toursPending: observable,
-      favoritesPending: observable,
       getToursList: action,
       makeFavorite: action,
+      getTour: action,
     })
     configure({
       enforceActions: 'never',
@@ -49,6 +48,10 @@ class ToursStore {
       .catch((e) => console.log(e))
   }
 
+  public getTour = (id: string): Promise<ResponseObject<FullApiTourResp>> => {
+    return callApi<FullApiTourResp>({ endpoint: `/tour?id=${id}&language=ru` })
+  }
+
   private saveFavoriteList = () => {
     setItem(StorageKeys.FAVORITES, this.favoriteTours)
   }
@@ -57,10 +60,8 @@ class ToursStore {
     getItem<Tour[]>(StorageKeys.FAVORITES).then((nextFavorites) => {
       if (nextFavorites) {
         this.favoriteTours = nextFavorites
-        this.favoritesPending = Pending.DONE
       } else {
         this.favoriteTours = []
-        this.favoritesPending = Pending.EMPTY
       }
     })
   }

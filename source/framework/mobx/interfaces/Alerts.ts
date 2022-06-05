@@ -6,5 +6,6 @@ export interface Alert {
   withButtons?: boolean
   leftBtnText?: string
   rightBtnText?: string
+  fillBackground?: boolean
   onPress?: () => void
 }

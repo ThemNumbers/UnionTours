@@ -7,13 +7,11 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native'
-import { ImageOrVideo } from 'react-native-image-crop-picker'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useKeyboard } from '../../../hooks/useKeyboard'
 import { Theme, useThemeStyles } from '../../../theme'
 import { IS_IOS } from '../../../utils/constants'
 import { sleep } from '../../../utils/sleep'
-import { ImageAttachmentButton } from '../../ImageAttachmentButton'
 import { StyledButton } from '../../UIKit/StyledButton'
 import { StyledText } from '../../UIKit/StyledText'
 import { IStyledTextInputRef, StyledTextInput } from '../../UIKit/StyledTextInput'
@@ -72,9 +70,7 @@ interface Props {
   requiredText?: string
   inputPlaceholder: string
   inputIsRequired?: boolean
-  withAttachments?: boolean
-  countAttachments?: number
-  onConfirm: (input: string, attachments: Array<ImageOrVideo>) => void
+  onConfirm: (input: string) => void
   hideModal: () => void
 }
 
@@ -83,14 +79,11 @@ const FeedbackModalContent: React.FC<Props> = ({
   inputPlaceholder,
   requiredText,
   buttonTitle,
-  withAttachments,
-  countAttachments,
   inputIsRequired,
   onConfirm,
   hideModal,
 }) => {
-  const { theme, styles } = useThemeStyles(createStyles)
-  const [selectedAttachments, setSelectedAttachments] = useState<Array<ImageOrVideo>>([])
+  const { styles } = useThemeStyles(createStyles)
   const [textInput, setTextInput] = useState<string>('')
   const textInputRef = React.useRef<IStyledTextInputRef | null>(null)
   const { keyboardOpened, keyboardHeight } = useKeyboard()
@@ -105,15 +98,9 @@ const FeedbackModalContent: React.FC<Props> = ({
     sleep(300).then(() => textInputRef.current && textInputRef.current.focus())
   }, [])
 
-  const onSelectAttachment = (value?: ImageOrVideo, index?: number) => {
-    setSelectedAttachments(
-      value ? [...selectedAttachments, value] : selectedAttachments.filter((a, i) => i !== index)
-    )
-  }
-
   const onConfirmPress = () => {
     Keyboard.dismiss()
-    onConfirm(textInput, selectedAttachments)
+    onConfirm(textInput)
     hideModal()
   }
 
@@ -162,30 +149,6 @@ const FeedbackModalContent: React.FC<Props> = ({
           ) : (
             <View style={styles.space} />
           )}
-
-          {withAttachments &&
-            selectedAttachments.map((attachment, attachmentIndex) => (
-              <ImageAttachmentButton
-                key={attachmentIndex}
-                onSelectImage={(selectedImage) =>
-                  onSelectAttachment(selectedImage, attachmentIndex)
-                }
-                selectedImage={attachment}
-                btnTitle={'Прикрепить файл'}
-                style={styles.imageAttachment}
-              />
-            ))}
-          {withAttachments && countAttachments && selectedAttachments.length < countAttachments ? (
-            <ImageAttachmentButton
-              activeBtnBgColor={theme.colors.gray_2}
-              activeBtnTextColor={theme.colors.cyan_6}
-              withoutModal
-              onSelectImage={(selectedImage) => onSelectAttachment(selectedImage)}
-              selectedImage={undefined}
-              btnTitle={'Прикрепить файл'}
-              style={styles.btnContainer}
-            />
-          ) : null}
 
           <StyledButton
             title={buttonTitle}
