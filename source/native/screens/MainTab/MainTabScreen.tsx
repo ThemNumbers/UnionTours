@@ -42,9 +42,7 @@ const MainTabScreen: React.FC<Props> = observer(({ navigation }) => {
   const isRequested = useRef<boolean>(false)
   const nextPageUri = false
   const { canMakeRequest } = useConnectionStatus()
-  const filterIsActive = filters.some(
-    (fc) => fc.filters.some((f) => f.isSelected) || fc.startSliderValue || fc.endSliderValue
-  )
+  const filterIsActive = filters.some((fc) => fc.filters.some((f) => f.isSelected))
 
   useEffect(() => {
     if (canMakeRequest) {
@@ -53,7 +51,7 @@ const MainTabScreen: React.FC<Props> = observer(({ navigation }) => {
   }, [])
 
   const onRefresh = () => {
-    console.log('res')
+    getToursList()
   }
 
   const renderFooter = () =>
@@ -111,10 +109,10 @@ const MainTabScreen: React.FC<Props> = observer(({ navigation }) => {
         isConnected={canMakeRequest}
       >
         <FlatList
-          data={tours}
+          data={filterIsActive ? [] : tours}
           style={styles.listContainer}
           ListEmptyComponent={renderEmpty}
-          contentContainerStyle={tours.length ? undefined : styles.listStyle}
+          contentContainerStyle={tours.length && !filterIsActive ? undefined : styles.listStyle}
           ListFooterComponent={renderFooter}
           ListHeaderComponent={renderHeader}
           refreshing={false}

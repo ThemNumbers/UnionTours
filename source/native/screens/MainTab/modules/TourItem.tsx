@@ -28,7 +28,7 @@ const createStyles = (theme: Theme) => {
       alignItems: 'center',
     },
     title: { color: theme.colors.gray_9, marginTop: 12, flex: 1 },
-    iconContainer: { alignItems: 'center', flexDirection: 'row' },
+    iconContainer: { alignItems: 'center', flexDirection: 'row', flex: 1 },
     footerText: { color: theme.colors.gray_8, marginLeft: 8 },
     priceContainer: {
       position: 'absolute',
@@ -117,20 +117,20 @@ const TourItem: React.FC<Props> = ({ item, isFavorite, onMakeFavorite, onCardPre
         </TouchableOpacity>
         <View style={styles.priceContainer}>
           <StyledText size={'s'} family={'semibold'} numberOfLines={1} style={styles.price}>
-            от {formatSum(Number(item.price))}
+            {item.price ? `от ${formatSum(Number(item.price))}` : 'Не указано'}
           </StyledText>
         </View>
       </ShadowView>
       <View style={styles.contentContainer}>
-        <View style={styles.iconContainer}>
+        <View style={[styles.iconContainer, { flex: 1 }]}>
           <FieldTimeIcon color={theme.colors.cyan_6} />
           <StyledText size={'s'} family={'semibold'} numberOfLines={1} style={styles.footerText}>
-            {item.nights} {getPlural(Number(item.nights), ['ночь', 'ночи', 'ночей'])}
+            {item.nights || 0} {getPlural(Number(item.nights), ['ночь', 'ночи', 'ночей'])}
           </StyledText>
         </View>
-        <View style={styles.iconContainer}>
+        <View style={[styles.iconContainer, { justifyContent: 'flex-end' }]}>
           <LocationIcon color={theme.colors.cyan_6} />
-          <StyledText size={'s'} family={'semibold'} numberOfLines={1} style={styles.footerText}>
+          <StyledText size={'s'} family={'semibold'} numberOfLines={2} style={styles.footerText}>
             {currentRegion?.title}
           </StyledText>
         </View>

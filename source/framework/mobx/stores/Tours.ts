@@ -4,6 +4,23 @@ import { callApi, ResponseObject } from '../../services/ApiService'
 import { getItem, setItem, StorageKeys } from '../../services/StorageService'
 import { FullApiTourResp, Pending, Tour } from '../interfaces/Tours'
 
+const shuffle = (array: Array<any>) => {
+  let currentIndex = array.length,
+    randomIndex
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+
+    // And swap it with the current element.
+    ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+  }
+
+  return array
+}
+
 class ToursStore {
   private root: RootStore
   public tours: Array<Tour> = []
@@ -40,9 +57,9 @@ class ToursStore {
     //this.root.filters.selectedFilters
     //this.root.filters.filters.map(f => )
     this.toursPending = Pending.LOADING
-    callApi<any>({ endpoint: '/catalog?language=ru&pageSize=50&query[category]=4' })
+    callApi<any>({ endpoint: '/catalog?language=ru&pageSize=200&query[category]=4' })
       .then((res) => {
-        this.tours = res.data.items
+        this.tours = shuffle(res.data.items)
         this.toursPending = Pending.DONE
       })
       .catch((e) => console.log(e))

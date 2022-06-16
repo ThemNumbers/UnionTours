@@ -40,7 +40,7 @@ export const AppContainer: React.FC = observer(() => {
 
   return (
     <NavigationContainer ref={navigationRef} theme={DefaultTheme}>
-      {filtersIsInitialized ? (
+      {filtersIsInitialized === true ? (
         <>
           <HomeStack />
           <FCMService />

@@ -38,7 +38,7 @@ const HomeStack: React.FC = () => (
 
     {/* THIS SHOULD PLACE SCREENS WITHOUT TAB BAR */}
     <Stack.Screen name={Routes.ImageViewerScreen} component={ImageViewerScreen} />
-    <Stack.Screen name={Routes.SelectCategoriesScreen} component={SelectCategoriesScreen} />
+    {/* <Stack.Screen name={Routes.SelectCategoriesScreen} component={SelectCategoriesScreen} /> */}
     <Stack.Screen name={Routes.AboutTourScreen} component={AboutTourScreen} />
     <Stack.Screen name={Routes.FiltersListScreen} component={FiltersListScreen} />
     <Stack.Screen name={Routes.FilterScreen} component={FilterScreen} />

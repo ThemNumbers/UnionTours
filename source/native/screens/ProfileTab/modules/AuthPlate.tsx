@@ -1,7 +1,10 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import { useModalsStore } from '../../../../framework/mobx/stores'
 import { ButtonWithModal } from '../../../components/ButtonWithModal'
+import { AuthModalContent } from '../../../components/ModalManager/contents/AuthModalContent'
 import { ShadowView } from '../../../components/ShadowView'
+import { StyledButton } from '../../../components/UIKit/StyledButton'
 import { StyledText } from '../../../components/UIKit/StyledText'
 import { Theme, useThemeStyles } from '../../../theme'
 
@@ -24,9 +27,17 @@ const createStyles = (theme: Theme) => {
 
 const AuthPlate: React.FC = () => {
   const { styles } = useThemeStyles(createStyles)
+  const { setModal } = useModalsStore()
 
   const onConfirm = (data: { comment: string; attachments: Array<any> }) => {
     return Promise.resolve()
+  }
+
+  const onAuthPress = () => {
+    setModal({
+      withSwipe: true,
+      renderContent: (hideModal: () => void) => <AuthModalContent hideModal={hideModal} />,
+    })
   }
 
   return (
@@ -38,21 +49,7 @@ const AuthPlate: React.FC = () => {
         Чтобы иметь возможность бронировать места, а также синхронизировать список избранного и
         предпочтений на всех устройствах
       </StyledText>
-      <ButtonWithModal
-        button={{
-          modalType: 'comment',
-          inputIsRequired: true,
-          requiredText: 'Обязательное поле ввода',
-          modalTitle: 'Обратная связь',
-          modalRightBtnText: 'Отправить',
-          inputPlaceholder: 'Расскажите о вашем пожелании или поделитесь идеей',
-          withAttachments: false,
-          countAttachments: 3,
-          title: 'Войти',
-          onConfirm: onConfirm,
-          style: styles.btnContainer,
-        }}
-      />
+      <StyledButton title={'Войти'} onPress={onAuthPress} containerStyle={styles.btnContainer} />
     </ShadowView>
   )
 }
